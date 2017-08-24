@@ -1,0 +1,19 @@
+{
+  "commitish" : "0.3.6",
+  "iOS" : [
+    {
+      "hash" : "d4f942b23928a7250e0a4716e388f1c03b50ed13448538bc5c493b91c3a60ee7",
+      "name" : "Hero"
+    }
+  ],
+  "xcodeVersion" : "Xcode 8.3\nBuild version 8E162",
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "Mac" : [
+
+  ]
+}

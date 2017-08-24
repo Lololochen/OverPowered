@@ -1,0 +1,17 @@
+/*
+ Localizable.strings
+ Overpower
+ 
+ Created by Bright Future on 24/11/2016.
+ Copyright © 2016 Bright Future. All rights reserved.
+ */
+
+Tutorial = "https://medium.com/over-power-vainglroy/about-overpowered-43c8ea1d60d4#.5256pl7dl";
+Period = ".";
+AlertTitle4BreakingPoint = "Breaking Point Stack";
+AlertMessage4BreakingPoint = "What's the averge Breaking Point stack you can get?";
+AlertTitle4TensionBow = "Fight Duration";
+AlertMessage4TensionBow = "How long is the fight (in seconds) ?";
+AlertTitle4Bonesaw = "Bonesaw Stack";
+AlertMessage4Bonesaw = "What's the average bonesaw stack you have?";
+Confirm = "Confirm";
