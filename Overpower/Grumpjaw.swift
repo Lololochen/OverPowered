@@ -27,14 +27,14 @@ struct Grumpjaw {
     
     let aAbilityCdPerTier: [Int : Double] = [1 : 12, 2 : 11, 3 : 10, 4 : 9, 5 : 8]
     let aAbilityDamagePerTier: [Int : Double] = [1 : 75, 2 : 125, 3 : 175, 4 : 225, 5 : 325]
-    let aAbilityBonusDamagePerStackPerTier: [Int : Double] = [1 : 20, 2 : 35, 3 : 50, 4 : 65, 5 : 95]
+    let aAbilityBonusDamagePerStackPerTier: [Int : Double] = [1 : 10, 2 : 25, 3 : 40, 4 : 55, 5 : 85]
     let aAbilityCpRatio = 0.5
     let aAbilityPerStackDamageCrystalRatio = 0.1
     
     let bAbilityCdPerTier: [Int : Double] = [1 : 9, 2 : 9, 3 : 9, 4 : 9, 5 : 9]
     let bAbilityEmpoweredDuration: [Int : Double] = [1 : 4, 2 : 4, 3 : 4, 4 : 4, 5 : 5]
     let bAbilityDamagePerTier: [Int : Double] = [1 : 20, 2 : 40, 3 : 60, 4 : 80, 5 : 100]
-    let bAbilityAttackSpeedPerTier: [Int : Double] = [1 : 0.2, 2 : 0.3, 3 : 0.4, 4 : 0.5, 5 : 0.6]
+    let bAbilityAttackSpeedPerTier: [Int : Double] = [1 : 0.1, 2 : 0.2, 3 : 0.3, 4 : 0.4, 5 : 0.5]
     let bAbilityBonusDamageCrystalRatio = 0.8
     
     let ultDamagePerTier: [Int : Double] = [1 : 400, 2 : 550, 3 : 700]
@@ -42,18 +42,18 @@ struct Grumpjaw {
     
     //A ability
     
-    var aAbilityNoStackDamage: Double {
+    var aAbilityNoStackRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityBonusDamagePerStack: Double {
+    var aAbilityBonusDamagePerStackRaw: Double {
         let x = aAbilityBonusDamagePerStackPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityFullStackDamage: Double {
-        return aAbilityNoStackDamage + aAbilityBonusDamagePerStack * 5
+    var aAbilityFullStackRawDamage: Double {
+        return aAbilityNoStackRawDamage + aAbilityBonusDamagePerStackRaw * 5
     }
     
     var aAbilityCooldown: Double {
@@ -62,13 +62,20 @@ struct Grumpjaw {
     
     //B ability
     
-    var bAbilityDps: Double {
-        dataSource.attacker.heroPower.empoweredWeaponPower = bAbilityDamagePerTier[bAbilityTier]!
-        dataSource.attacker.heroPower.empoweredAttackSpeed = bAbilityAttackSpeedPerTier[bAbilityTier]!
-        let otherDPS = DPSCalculator(dataSource: dataSource).dps
-        
-        let crystalDPS = bAbilityBonusDamageCrystalRatio * dataSource.attacker.crystalPower * DPSCalculator(dataSource: dataSource).maxHitsPerSec
-        return otherDPS + crystalDPS
+    var bAbilityHitsPerSec: Double {
+        let attackSpeed = dataSource.attacker.attackSpeed + bAbilityAttackSpeedPerTier[bAbilityTier]!
+        return attackSpeed / dataSource.attacker.attackCooldown
+    }
+    
+    var bAbilityRawWeaponDPS: Double {
+        let weaponPower = dataSource.attacker.weaponPower
+        return weaponPower * bAbilityHitsPerSec
+    }
+    
+    var bAbilityRawCrystalDPS: Double {
+        let crystalPower = bAbilityBonusDamageCrystalRatio * dataSource.attacker.crystalPower + bAbilityDamagePerTier[bAbilityTier]!
+        let dps = crystalPower * bAbilityHitsPerSec
+        return dps * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -77,9 +84,9 @@ struct Grumpjaw {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
 }

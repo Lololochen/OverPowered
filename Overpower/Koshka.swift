@@ -40,9 +40,9 @@ struct Koshka {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -51,16 +51,14 @@ struct Koshka {
     
     //B ability
     
-    var bAbilityTwirlDamage: Double {
+    var bAbilityTwirlRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityTwirlDamageCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityEmpoweredBasicAttackDamage: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
-        let buffDamageStrength = bAbilityBuffDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityBuffDamageCrystalRatio
-        let buffDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(buffDamageStrength)
-        return  basicAttackDamage + buffDamage
+    var bAbilityEmpoweredRawDamage: Double {
+        let x = bAbilityBuffDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityBuffDamageCrystalRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -69,9 +67,9 @@ struct Koshka {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
 }

@@ -18,17 +18,15 @@ class FlickerAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability DPS".localizedString(), calculator.aAbilityDps.string()))
+        result.append(("A ability raw DPS".localizedString(), calculator.aAbilityRawDps.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability DPS".localizedString(), calculator.bAbilityDps.string()))
+        result.append(("B ability raw DPS".localizedString(), calculator.bAbilityRawDps.string()))
         
-        result.append(("Detonate damage".localizedString(), calculator.bAbilityDetonateDamage.string()))
+        result.append(("Raw detonate damage".localizedString(), calculator.bAbilityDetonateRawDamage.string()))
         
-        result.append(("Total damage".localizedString(), calculator.bAbilityTotalDamage.string()))
-        
-        result.append(("Slow strength".localizedString(), percentageString(calculator.bAbilitySlowStrength)))
+        result.append(("Total raw damage".localizedString(), calculator.bAbilityTotalRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         

@@ -46,13 +46,6 @@ struct Saw {
         return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
     }
     
-    func aAbilityCalcDamageWithHealthPercentage(percentage: Double) -> Double {
-        let x = dataSource.attacker.weaponPower * 0.2 + aAbilityMissingHealthDamagePerTier[aAbilityTier]! * (1 - percentage) * dataSource.defender.health
-        let missingHealthDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        
-        return aAbilityDamageOnFullHealthEnemy + missingHealthDamage
-    }
-    
     var aAbilityExecutableHealthPercentage: Double {
         let b = (1 - dataSource.attacker.shieldPierce) / (1 + dataSource.defender.shieldPierce / 100)
         let c = aAbilityMissingHealthDamagePerTier[aAbilityTier]! * dataSource.defender.health
@@ -72,9 +65,10 @@ struct Saw {
     
     //B ability
     
-    var bAbilityTotalDamage: Double {
+    var bAbilityRawDPS: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        let total = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        return total / 2
     }
     
     var bAbilitySlowDuration: Double {
@@ -84,7 +78,5 @@ struct Saw {
     var bAbilityCooldown: Double {
         return bAbilityCdPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
-    
-    //ult
     
 }

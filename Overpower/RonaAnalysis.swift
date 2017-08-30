@@ -18,33 +18,23 @@ class RonaAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability impact damage".localizedString(), calculator.aAbilityImpactDamage.string()))
+        result.append(("A ability impact raw crystal damage".localizedString(), calculator.aAbilityImpactRawCrystalDamage.string()))
         
-        result.append(("Rupture damage".localizedString(), calculator.aAbilityRuptureDamage.string()))
-        
-        result.append(("Fortified health from single target".localizedString(), calculator.aAbilityFortifiedHealthFromSingleTarget.string()))
-        
-        result.append(("Fortified health from triple targets".localizedString(), calculator.aAbilityFortifiedHealthFromTripleTargets.string()))
-        
-        result.append(("Blood rage gain from single target".localizedString(), calculator.aAbilityBloodRageGainOnSingleTarget.string()))
-        
-        result.append(("Blood rage gain from triple targets".localizedString(), calculator.aAbilityBloodRageGainOnTripleTargets.string()))
-        
+        result.append(("A ability rupture raw crystal damage".localizedString(), calculator.aAbilityRuptureRawCrystalDamage.string()))
+    
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability first hit damage".localizedString(), calculator.bAbilityFirstAttackDamage.string()))
+        result.append(("B ability activate twice raw weapon DPS".localizedString(), calculator.bAbilityActivateTwiceRawWeaponDPS.string()))
         
-        result.append(("Damage with 2nd hit".localizedString(), (calculator.bAbilityFirstAttackDamage + calculator.bAbilitySecondAttackDamage).string()))
-        
-        result.append(("Blood rage gain".localizedString(), calculator.bAbilityBloodRageGain.string()))
-        
+        result.append(("B ability activate twice raw crystal DPS".localizedString(), calculator.bAbilityActivateTwiceRawCrystalDPS.string()))
+
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
         result.append(("Miminum cooldown in fight (basic attacking enemy non-stop)".localizedString(), roundedString(calculator.bAbilityCooldownInFight)))
         
-        result.append(("Ult DPS".localizedString(), calculator.ultDps.string()))
+        result.append(("Ult raw weapon DPS".localizedString(), calculator.ultRawWeaponDPS.string()))
         
-        result.append(("Fortified health per second".localizedString(), calculator.ultFortifiedHealPerSec.string()))
+        result.append(("Ult raw crystal DPS".localizedString(), calculator.ultRawCrystalDPS.string()))
         
         return result
     }

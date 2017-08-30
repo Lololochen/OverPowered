@@ -18,27 +18,21 @@ class BlackfeatherAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage without Heartthrob stack".localizedString(), calculator.aAbilityDamageWithoutHeartthrobStack.string()))
+        result.append(("A ability raw crystal damage".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         
-        result.append(("Damage on full health enemy with full Heartthrob stack".localizedString(), calculator.aAbilityCalcDamageWithHealthPercentage(percentage: 1).string()))
+        result.append(("A ability cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("Full Heartthrob stack damage can execute enemy with health lower than".localizedString(), percentageString(calculator.aAbilityExecutableHealthPercentage)))
+        result.append(("B ability raw crystal damage".localizedString(), calculator.bAbilityRawCrystalDamage.string()))
         
-        result.append(("A ability cooldown".localizedString(), calculator.aAbilityCooldown.string()))
+        result.append(("B ability raw weapon damage".localizedString(), calculator.bAbilityRawWeaponDamage.string()))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
-        
-        result.append(("Slow strength".localizedString(), percentageString(calculator.bAbilitySlow)))
-        
-        result.append(("Slow duration".localizedString(), roundedString(calculator.bAbilitySlowDuration)))
+        result.append(("Slow factor".localizedString(), roundedString(calculator.bAbilitySlowFactor)))
         
         result.append(("B ability cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
         result.append(("Focus cost when hitting an enemy".localizedString(), calculator.bAbilityFocusCostWhenHittingEnemy.string()))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Fortified health".localizedString(), calculator.ultFortifiedHealth.string()))
+        result.append(("Ult raw crystal damage".localizedString(), calculator.ultRawCrystalDamage.string()))
         
         result.append(("Charge time".localizedString(), calculator.ultChargeTime.string()))
         

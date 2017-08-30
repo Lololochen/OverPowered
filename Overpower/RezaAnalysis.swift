@@ -18,27 +18,23 @@ class RezaAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
         
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("Basic attack with bonus raw crystal damage".localizedString(), calculator.basicAttackBonusRawCrystalDamage.string()))
         
-        result.append(("Damage with basic attack".localizedString(), calculator.aAbilityDamageWithBasicAttacks.string()))
-        
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
+    
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability dash raw damage".localizedString(), calculator.bAbilityDashRawDamage.string()))
         
-        result.append(("Damage with basic attack without fire".localizedString(), calculator.bAbilityDamageWithBasicAttacksWithoutFire.string()))
-        
-        result.append(("Damage with basic attack".localizedString(), calculator.bAbilityDamageWithBasicAttacks.string()))
+        result.append(("B ability empowered basic attack raw crystal damage".localizedString(), calculator.basicAttackWithBonusDamageRawCrystalDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
-        result.append(("Ult dps".localizedString(), calculator.ultDps.string()))
+        result.append(("Ult max raw DPS".localizedString(), calculator.ultMaxRawCrystalDPS.string()))
         
         result.append(("Fortified health".localizedString(), calculator.ultFortifiedHealth.string()))
-        
-        result.append(("Ult Duration".localizedString(), calculator.ultDurationTime.string()))
         
         result.append(("Cooldown".localizedString(), calculator.ultCooldown.string()))
         

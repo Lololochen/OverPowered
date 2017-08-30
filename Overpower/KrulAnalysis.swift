@@ -18,29 +18,27 @@ class KrulAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw weapon damage".localizedString(), calculator.aAbilityRawWeaponDamage.string()))
+        
+        result.append(("A ability raw crystal damage".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         
         result.append(("Health barrier".localizedString(), calculator.aAbilityBarrier.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability full stack damage".localizedString(), calculator.bAbilityFullStackDamage.string()))
+        result.append(("B ability no stack raw damage".localizedString(), calculator.bAbilityNoStackRawDamage.string()))
         
-        result.append(("Full stack heal".localizedString(), calculator.bAbilityFullStackHeal.string()))
-        
-        result.append(("3 stacks damage".localizedString(), calculator.bAbilityThreeStackDamage.string()))
-        
-        result.append(("3 stack heal".localizedString(), calculator.bAbilityThreeStackHeal.string()))
-        
-        result.append(("No stack damage".localizedString(), calculator.bAbilityNoStackDamage.string()))
+        result.append(("B ability full stack raw damage".localizedString(), calculator.bAbilityFullStackRawDamage.string()))
         
         result.append(("No stack heal".localizedString(), calculator.bAbilityNoStackHeal.string()))
+        
+        result.append(("Full stack heal".localizedString(), calculator.bAbilityFullStackHeal.string()))
         
         result.append(("Weakness duration".localizedString(), roundedString(calculator.bAbilityWeaknessDuration)))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         result.append(("Max stun plus slow duration".localizedString(), roundedString(calculator.ultMaxStunPlusSlowDuration)))
         

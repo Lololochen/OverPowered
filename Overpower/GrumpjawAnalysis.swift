@@ -18,17 +18,19 @@ class GrumpjawAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability full stack damage".localizedString(), calculator.aAbilityFullStackDamage.string()))
+        result.append(("A ability full stack raw damage".localizedString(), calculator.aAbilityFullStackRawDamage.string()))
         
-        result.append(("Damage with no stack".localizedString(), calculator.aAbilityNoStackDamage.string()))
+        result.append(("No stack raw damage".localizedString(), calculator.aAbilityNoStackRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability DPS".localizedString(), calculator.bAbilityDps.string()))
+        result.append(("B ability raw crystal DPS".localizedString(), calculator.bAbilityRawCrystalDPS.string()))
+        
+        result.append(("B ability raw weapon DPS".localizedString(), calculator.bAbilityRawWeaponDPS.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

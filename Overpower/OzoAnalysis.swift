@@ -18,17 +18,17 @@ class OzoAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("Damage per hit".localizedString(), calculator.aAbilityDamagePerHit.string()))
+        result.append(("A ability raw weapon damage per hit".localizedString(), calculator.aAbilityRawWeaponDamagePerHit.string()))
+        
+        result.append(("A ability raw crystal damage per hit".localizedString(), calculator.aAbilityRawCrystalDamagePerHit.string()))
         
         result.append(("Heal from hitting 1 enemy".localizedString(), calculator.aAbilityHealPerHitPerEnemy.string()))
         
-        result.append(("Heal from hitting 3 enemy".localizedString(), ((calculator.aAbilityHealPerHitPerEnemy) * 3).string()))
-        
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("First two bounce damage".localizedString(), calculator.bAbilityFirstTwoBounceDamage.string()))
+        result.append(("First two bounce raw damage".localizedString(), calculator.bAbilityFirstTwoBounceRawDamage.string()))
         
-        result.append(("3rd bounce damage".localizedString(), calculator.bAbilityThirdBounceDamage.string()))
+        result.append(("3rd bounce raw damage".localizedString(), calculator.bAbilityThirdBounceRawDamage.string()))
         
         result.append(("Speed boost".localizedString(), roundedString(calculator.bAbilitySpeedBoost)))
         
@@ -38,9 +38,9 @@ class OzoAnalysis: AbilityAnalysis {
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
-        result.append(("Secondary damage".localizedString(), calculator.ultSecondaryDamage.string()))
+        result.append(("Secondary target raw damage".localizedString(), calculator.ultSecondaryTargetRawDamage.string()))
         
         return result
 

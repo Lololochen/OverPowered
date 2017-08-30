@@ -32,9 +32,9 @@ struct Reza {
 
     let bAbilityCdPerTier: [Int : Double] = [1 : 2, 2 : 2, 3 : 2, 4 : 2, 5 : 2]
     let bAbilityDamagePerTier: [Int : Double] = [1 : 70, 2 : 100, 3 : 130, 4 : 160, 5 : 190]
-    let bAbilityAddNormalAttackDamagePerTier: [Int : Double] = [1 : 25, 2 : 50, 3 : 75, 4 : 100, 5 : 125]
+    let bAbilityBasicAttackBonusDamagePerTier: [Int : Double] = [1 : 25, 2 : 50, 3 : 75, 4 : 100, 5 : 125]
     let bAbilityDamageCrystalRatio = 0.6
-    let bAbilityAddNomalAttackCrystalRatio = 0.8
+    let bAbilityBasicAttackBonusCrystalRatio = 0.8
     let bAbilityChargeTime: [Int : Double] = [1 : 17, 2 : 16, 3 : 15, 4 : 14, 5 : 12]
     
     let ultDamagePerTier: [Int : Double] = [1 : 250, 2 : 350, 3 : 450]
@@ -43,13 +43,12 @@ struct Reza {
     let ultFortifiedHealtheRatio = 0.1
     let ultDurationTimePerTier: [Int : Double] = [1 : 4, 2 : 5, 3 : 6]
     let ultCooldownPerTier: [Int : Double] = [1 : 50, 2 : 45, 3 : 40]
-
-    var withBasicAttacks: Double{
-        let basicAttackWeaponDamage = BasicAttackDamage(dataSource: dataSource).damage
-        let basicAttackCrystalDamage = 20.0 + Double(dataSource.attacker.heroPower.level!) * 15 + dataSource.attacker.crystalPower * 1.2
-        let receivedBasicAttackCrystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(basicAttackCrystalDamage)
-        let receivedBasicAttackWeaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(basicAttackWeaponDamage)
-        return receivedBasicAttackWeaponDamage + receivedBasicAttackCrystalDamage
+    
+    var basicAttackBonusRawCrystalDamage: Double {
+        let x = 20.0 + Double(dataSource.attacker.heroPower.level!) * 15 + dataSource.attacker.crystalPower * 1.2
+        let bonusDamage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        let baseRawCrystalDamage = BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit
+        return bonusDamage + baseRawCrystalDamage
     }
     
     //A ability
@@ -58,15 +57,10 @@ struct Reza {
         return aAbilityCdPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
-    
-    var aAbilityDamageWithBasicAttacks: Double {
-        return withBasicAttacks + aAbilityDamage
-    }
-    
     
     //B ability
     
@@ -74,23 +68,18 @@ struct Reza {
         return bAbilityCdPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var bAbilityDamage: Double {
+    var bAbilityDashRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDamageCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAddDamage: Double{
-        let x = bAbilityAddNormalAttackDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityAddNomalAttackCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+    var bAbilityBasicAttackBonusRawDamage: Double{
+        let x = bAbilityBasicAttackBonusDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityBasicAttackBonusCrystalRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityDamageWithBasicAttacksWithoutFire: Double{
-        let basicAttackWeaponDamage = BasicAttackDamage(dataSource: dataSource).damage
-        return bAbilityDamage + bAddDamage + basicAttackWeaponDamage
-    }
-    
-    var bAbilityDamageWithBasicAttacks: Double {
-        return withBasicAttacks + bAbilityDamage + bAddDamage
+    var basicAttackWithBonusDamageRawCrystalDamage: Double {
+        return bAbilityBasicAttackBonusRawDamage + basicAttackBonusRawCrystalDamage
     }
     
     //ult
@@ -99,27 +88,17 @@ struct Reza {
         return ultCooldownPerTier[ultTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultDamageCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultDamageWithBasicAttacks: Double {
-        return withBasicAttacks + ultDamage
-    }
-    
-    var ultDps: Double {
-        return (dataSource.attacker.attackSpeed / dataSource.attacker.attackCooldown) * withBasicAttacks
+    var ultMaxRawCrystalDPS: Double {
+        return (dataSource.attacker.attackSpeed / dataSource.attacker.attackCooldown) * basicAttackBonusRawCrystalDamage
     }
     
     var ultFortifiedHealth: Double {
         return ultFortifiedHealthePerTier[ultTier]! + dataSource.attacker.crystalPower * 0.1
     }
-    
-    var ultDurationTime: Double{
-        return ultDurationTimePerTier[ultTier]!
-    }
-    
-    
     
 }

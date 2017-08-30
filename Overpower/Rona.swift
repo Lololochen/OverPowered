@@ -28,7 +28,7 @@ struct Rona {
     let aAbilityCdPerTier: [Int : Double] = [1 : 13, 2 : 12, 3 : 11, 4 : 10, 5 : 9]
     let aAbilityImpactDamagePerTier: [Int : Double] = [1 : 50, 2 : 70, 3 : 90, 4 : 110, 5 : 150]
     let aAbilityBloodRageGainPerTier: [Int : Double] = [1 : 25, 2 : 25, 3 : 25, 4 : 25, 5 : 25]
-    let aAbilityFortifiedHealthPerTier: [Int : Double] = [1 : 30, 2 : 40, 3 : 50, 4 : 60, 5 : 80]
+    let aAbilityFortifiedHealthPerTier: [Int : Double] = [1 : 30, 2 : 45, 3 : 60, 4 : 75, 5 : 105]
     let aAbilityRuptureDamagePerTier: [Int : Double] = [1 : 100, 2 : 140, 3 : 180, 4 : 220, 5 : 300]
     
     let bAbilityCdPerTier: [Int : Double] = [1 : 16, 2 : 15, 3 : 14, 4 : 13, 5 : 12]
@@ -46,31 +46,14 @@ struct Rona {
     
     //A ability
     
-    var aAbilityBloodRageGainOnSingleTarget: Double {
-        return aAbilityBloodRageGainPerTier[aAbilityTier]!
-    }
-    
-    var aAbilityBloodRageGainOnTripleTargets: Double {
-        let gain = aAbilityBloodRageGainOnSingleTarget * 3
-        return (gain > 100) ? 100 : gain
-    }
-    
-    var aAbilityImpactDamage: Double {
+    var aAbilityImpactRawCrystalDamage: Double {
         let x = aAbilityImpactDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityRuptureDamage: Double {
+    var aAbilityRuptureRawCrystalDamage: Double {
         let x = aAbilityRuptureDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var aAbilityFortifiedHealthFromSingleTarget: Double {
-        return aAbilityFortifiedHealthPerTier[aAbilityTier]!
-    }
-    
-    var aAbilityFortifiedHealthFromTripleTargets: Double {
-        return aAbilityFortifiedHealthFromSingleTarget * 3
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -79,30 +62,19 @@ struct Rona {
     
     //B ability
     
-    var bAbilityFirstAttackDamage: Double {
-        
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * 0.85
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        
-        let crystalStrength = bAbilityFirstAttackDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 1.0
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        
-        return weaponDamage + crystalDamage
+    var bAbilityActivateTwiceHitsPerSec: Double {
+        let newAttackSpeed = dataSource.attacker.attackSpeed + bAbilityAttackSpeedGainPerTier[bAbilityTier]!
+        return newAttackSpeed / dataSource.attacker.attackCooldown
     }
     
-    var bAbilityBloodRageGain: Double {
-        return bAbilityBloodRageGainPerTier[bAbilityTier]!
+    var bAbilityActivateTwiceRawWeaponDPS: Double {
+        let weaponPower = BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit
+        return weaponPower * bAbilityActivateTwiceHitsPerSec
     }
     
-    var bAbilitySecondAttackDamage: Double {
-        
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * 0.85
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        
-        let crystalStrength = bAbilitySecondAttackDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 1.0
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        
-        return weaponDamage + crystalDamage
+    var bAbilityActivateTwiceRawCrystalDPS: Double {
+        let crystalPower = BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit
+        return crystalPower * bAbilityActivateTwiceHitsPerSec
     }
     
     var bAbilityCooldown: Double {
@@ -116,18 +88,13 @@ struct Rona {
     
     //ult
     
-    var ultDps: Double {
-        let weaponStrength = ultDpsPerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * ultWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        
-        let crystalStrength = dataSource.attacker.crystalPower * ultCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        
-        return weaponDamage + crystalDamage
+    var ultRawWeaponDPS: Double {
+        return ultDpsPerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * ultWpRatio
     }
     
-    var ultFortifiedHealPerSec: Double {
-        return ultFortifyPerSecPerTier[ultTier]!
+    var ultRawCrystalDPS: Double {
+        let x = dataSource.attacker.crystalPower * ultCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultCooldown: Double {

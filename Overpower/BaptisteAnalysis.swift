@@ -20,27 +20,23 @@ class BaptisteAnalysis: AbilityAnalysis {
         
         result.append(("Passive full stack heal".localizedString(), calculator.passiveFullStackHeal.string()))
         
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw crystal damage".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         
-        result.append(("Splash damage".localizedString(), calculator.aAbilitySplashDamage.string()))
+        result.append(("Splash raw crystal damage".localizedString(), calculator.aAbilitySplashRawCrystalDamage.string()))
         
-        result.append(("Slow distance \n(how much less the enemy can move when slowed, assuming the enemy doesn't use boots or acceleration abilities)".localizedString(), roundedString(calculator.aAbilitySlowDistance)))
-        
-        result.append(("Range".localizedString(), calculator.aAbilityRange.string()))
+        result.append(("Slow factor".localizedString(), roundedString(calculator.aAbilitySlowFactor)))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability raw crystal damage".localizedString(), calculator.bAbilityRawCrystalDamage.string()))
         
-        result.append(("Full damage".localizedString(), calculator.bAbilityFullDamage.string()))
-        
-        result.append(("Stun duration".localizedString(), roundedString(calculator.bAbilityStunDuration)))
+        result.append(("Tether break raw crystal damage".localizedString(), calculator.bAbilityTetherBreakRawCrystalDamage.string()))
         
         result.append(("Range".localizedString(), calculator.bAbilityRange.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult total damage".localizedString(), calculator.ultTotalDamage.string()))
+        result.append(("Ult total raw crystal damage".localizedString(), calculator.ultTotalRawCrystalDamage.string()))
     
         return result
     }

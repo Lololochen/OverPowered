@@ -39,31 +39,30 @@ struct Alpha {
     let bAbilityCpRatio = 1.0
     let bAbilityWpRatio = 1.0
     let bAbilityBasicAttackCDRPerTier: [Int : Double] = [1 : 1, 2 : 1, 3 : 1, 4 : 1, 5 : 1.2]
-    let bAbilityBonusDamagePerStackPerTier: [Int : Double] = [1 : 0.1, 2 : 0.1, 3 : 0.1, 4 : 0.1, 5 : 0.15]
     
     let ultDamagePerTier: [Int : Double] = [1 : 529, 2 : 933, 3 : 1337]
     let ultCpRatio = 2.5
     
     //aAbility
     
-    var aAbilityNoStackDamage: Double {
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var aAbilityNoStackRawWeaponDamage: Double {
+        let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityCoreOverloadBunusDamage: Double {
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * aAbilityDamagePerStackWeaponRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = aAbilityDamagePerStackPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityDamagePerStackCrystalRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var aAbilityNoStackRawCrystalDamage: Double {
+        return dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
     }
     
-    var aAbilityFullStackDamage: Double {
-        return aAbilityCoreOverloadBunusDamage * 3 + aAbilityNoStackDamage
+    var aAbilityFullStackRawCrystalDamage: Double {
+        let rawCrystalDamagePerStack = dataSource.attacker.buildPower.crystalPower * aAbilityDamagePerStackCrystalRatio
+        let x = aAbilityNoStackRawCrystalDamage + rawCrystalDamagePerStack * 3
+        return  x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var aAbilityFullStackRawWeaponDamage: Double {
+        let rawWeaponDamagePerStack = dataSource.attacker.buildPower.weaponPower * aAbilityDamagePerStackWeaponRatio
+        return aAbilityNoStackRawWeaponDamage + rawWeaponDamagePerStack * 3
     }
     
     var aAbilityCooldown: Double {
@@ -72,40 +71,19 @@ struct Alpha {
     
     //bAbility
     
-    var bAbilityDamage: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * bAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage + basicAttackDamage
-    }
-    
-    var bAbilityHealPerStack: Double {
-        return 10 + dataSource.attacker.weaponPower * 0.02
-    }
-    
-    var bAbilityMaxHealPerSec: Double {
-        return bAbilityHealPerStack * 3 * (DPSCalculator(dataSource: dataSource).maxHitsPerSec + 1 / bAbilityCooldown)
-    }
-    
-    var bAbilityFullStackDamage: Double {
-        return bAbilityDamage * (bAbilityBonusDamagePerStackPerTier[bAbilityTier]! * 3 + 1)
-    }
-    
     var bAbilityCooldown: Double {
         return bAbilityCdPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
     var bAbilityMimimumCooldownInFight: Double {
-        return bAbilityCooldown / (bAbilityBasicAttackCDRPerTier[bAbilityTier]! + DPSCalculator(dataSource: dataSource).maxHitsPerSec)
+        return bAbilityCooldown / (bAbilityBasicAttackCDRPerTier[bAbilityTier]! + BasicAttackDamage(dataSource: dataSource).maxHitsPerSec)
     }
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return  x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultRebootHealth: Double {

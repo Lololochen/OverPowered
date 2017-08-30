@@ -18,13 +18,13 @@ class SamuelAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage per hit".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage per hit".localizedString(), calculator.aAbilityRawDamagePerHit.string()))
         
-        result.append(("Plus empowered damage".localizedString(), calculator.aAbilityWithEmpoweredDamage.string()))
+        result.append(("A ability raw DPS inside Drifting Dark".localizedString(), calculator.empoweredRawDPS.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability DPS".localizedString(), calculator.bAbilityDps.string()))
+        result.append(("B ability raw DPS".localizedString(), calculator.bAbilityRawDps.string()))
         
         result.append(("Heal per second from each enemy standing in Drifting Dark".localizedString(), calculator.bAbilityHealPerSecPerTarget.string()))
         
@@ -32,9 +32,7 @@ class SamuelAnalysis: AbilityAnalysis {
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Sleep duration".localizedString(), roundedString(calculator.ultSleepDuration)))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

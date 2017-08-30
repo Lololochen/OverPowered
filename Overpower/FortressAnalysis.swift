@@ -18,31 +18,17 @@ class FortressAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
-        
-        result.append(("Speed boost".localizedString(), roundedString(calculator.aAbilitySpeedBoost)))
-        
-        result.append(("Duration".localizedString(), calculator.aAbilityDuration.string()))
-        
-        result.append(("Lifesteal".localizedString(), percentageString(calculator.aAbilityLifeSteal)))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability initial damage".localizedString(), calculator.bAbilityDamage.string()))
-        
-        result.append(("Full bleeding stack damage".localizedString(), calculator.bAbilityFullStackDamage.string()))
+        result.append(("B ability on hit raw damage".localizedString(), calculator.bAbilityOnHitRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult duration".localizedString(), calculator.ultDuration.string()))
+        result.append(("Bleeding effect raw DPS".localizedString(), calculator.bleedRawDPS.string()))
         
-        result.append(("Attack speed increase".localizedString(), percentageString(calculator.ultAttackSpeedIncrease)))
-        
-        result.append(("Fortified health".localizedString(), calculator.ultFortifiedHealth.string()))
-        
-        result.append(("Wolf DPS with bleeding effect".localizedString(), calculator.ultWolfDPS.string()))
-        
-        result.append(("Bleeding stack applied per second".localizedString(), calculator.ultBleedingStackAppliedPerSec.string()))
+        result.append(("Wolf raw DPS with bleeding effect".localizedString(), calculator.ultDpsPerWolf.string()))
         
         return result
     }

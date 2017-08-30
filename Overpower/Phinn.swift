@@ -40,9 +40,9 @@ struct Phinn {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -51,13 +51,9 @@ struct Phinn {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityDuration: Double {
-        return bAbilityDurationPerTier[bAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityFortifiedHealth: Double {
@@ -78,8 +74,8 @@ struct Phinn {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
 }

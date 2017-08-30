@@ -18,23 +18,19 @@ class AdagioAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
         
-        result.append(("Arcane fire damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("Arcane fire damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Total heal".localizedString(), calculator.aAbilityHeal.string()))
         
         result.append(("A ability cooldown".localizedString(), calculator.aAbilityCooldown.string()))
         
-        result.append(("B ability self cast, target on fire DPS".localizedString(), calculator.bAbilityMaxDPS.string()))
+        result.append(("B ability self cast, target on fire raw crystal DPS".localizedString(), calculator.bAbilityMaxRawCrystalDPS.string()))
         
-        result.append(("B ability self cast, target not on fire DPS".localizedString(), calculator.bAbilityMinDPS.string()))
-        
-        result.append(("Buff ally, target on fire per shot damage".localizedString(), calculator.bAbilityBuffDamagePerShotMax.string()))
-        
-        result.append(("Buff ally, target not on fire per shot damage".localizedString(), calculator.bAbilityBuffDamagePerShotMin.string()))
+        result.append(("B ability self cast, target not on fire raw crystal DPS".localizedString(), calculator.bAbilityMinRawCrystalDPS.string()))
         
         result.append(("B ability cooldown".localizedString(), calculator.bAbilityCooldown.string()))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

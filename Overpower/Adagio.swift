@@ -53,9 +53,9 @@ struct Adagio {
         return aAbilityFireDurationPerTier[aAbilityTier]!
     }
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = (aAbilityFireDamagePerSec[aAbilityTier]! + dataSource.attacker.crystalPower * 0.2) * aAbilityFireDurationPerTier[aAbilityTier]!
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -64,36 +64,28 @@ struct Adagio {
     
     // B ability
     
-    var bAbilityBuffDamagePerShotMax: Double {
-        let x = bAbilityBuffDamagePerTier[bAbilityTier]! + bAbilityArcaneFireBonusPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.85
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityBuffDamagePerShotMin: Double {
-        let x =  bAbilityBuffDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.4
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilitySelfCastTotalDamageMax: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage * bAbilityNumberOfAttacksPerTier[bAbilityTier]!
+    var bAbilitySelfCastTotalRawDamageMax: Double {
         let x = bAbilityBuffDamagePerTier[bAbilityTier]! + bAbilitySelfCastBonusPerTier[bAbilityTier]! + bAbilityArcaneFireBonusPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 1.05
-        let abilityDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return basicAttackDamage + abilityDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityMaxDPS: Double {
-        return bAbilitySelfCastTotalDamageMax / (bAbilityNumberOfAttacksPerTier[bAbilityTier]! / DPSCalculator(dataSource: dataSource).maxHitsPerSec)
+    // self cast, target on fire
+    var bAbilityMaxRawCrystalDPS: Double {
+        let abilityDamage = bAbilitySelfCastTotalRawDamageMax / (bAbilityNumberOfAttacksPerTier[bAbilityTier]! / BasicAttackDamage(dataSource: dataSource).maxHitsPerSec)
+        let basicAttackCrystalDPS = BasicAttackDamage(dataSource: dataSource).rawCrystalDPS
+        return abilityDamage + basicAttackCrystalDPS
     }
     
-    var bAbilitySelfCastTotalDamageMin: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage * bAbilityNumberOfAttacksPerTier[bAbilityTier]!
+    var bAbilitySelfCastTotalRawDamageMin: Double {
         let x = bAbilityBuffDamagePerTier[bAbilityTier]! + bAbilitySelfCastBonusPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.6
-        let abilityDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return basicAttackDamage + abilityDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityMinDPS: Double {
-        return bAbilitySelfCastTotalDamageMin / (bAbilityNumberOfAttacksPerTier[bAbilityTier]! / DPSCalculator(dataSource: dataSource).maxHitsPerSec)
+    // self cast, target not on fire
+    var bAbilityMinRawCrystalDPS: Double {
+        let abilityDamage = bAbilitySelfCastTotalRawDamageMin / (bAbilityNumberOfAttacksPerTier[bAbilityTier]! / BasicAttackDamage(dataSource: dataSource).maxHitsPerSec)
+        let basicAttackCrystalDPS = BasicAttackDamage(dataSource: dataSource).rawCrystalDPS
+        return abilityDamage + basicAttackCrystalDPS
     }
     
     var bAbilityCooldown: Double {
@@ -102,13 +94,9 @@ struct Adagio {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var ultFortifiedHealth: Double {
-        return ultFortifiedHealthPerTier[ultTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
 }

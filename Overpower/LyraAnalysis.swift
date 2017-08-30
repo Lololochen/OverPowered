@@ -22,18 +22,16 @@ class LyraAnalysis: AbilityAnalysis {
         
         result.append(("Max heal".localizedString(), calculator.aAbilityMaxHeal.string()))
         
-        result.append(("Damage per second".localizedString(), calculator.aAbilityDps.string()))
+        result.append(("A ability raw DPS".localizedString(), calculator.aAbilityRawDps.string()))
         
-        result.append(("Detonate damage".localizedString(), calculator.aAbilityDetonateDamage.string()))
+        result.append(("A ability detonate raw damage".localizedString(), calculator.aAbilityDetonateRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability raw damage".localizedString(), calculator.bAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), calculator.bAbilityCooldown.string()))
-        
-        result.append(("Ult range".localizedString(), calculator.ultRange.string()))
-        
+                
         return result
     }
 }

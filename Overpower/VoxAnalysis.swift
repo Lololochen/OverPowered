@@ -18,29 +18,15 @@ class VoxAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        let a = calculator.dpsWithAAbility
-        result.append(("Basic attacks DPS with A ability".localizedString(), a.string()))
+        result.append(("A ability cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        let b = calculator.bounceDPS
-        result.append(("Resonance bounce DPS".localizedString(), b.string()))
+        result.append(("B ability cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        let f = calculator.aAbilityCooldown
-        result.append(("A ability cooldown".localizedString(), roundedString(f)))
+        result.append(("Resonance bounce raw DPS".localizedString(), calculator.bounceRawDPS.string()))
         
-        let c = calculator.bAbilitySlowAtCenter
-        result.append(("B ability slow at center".localizedString(), percentageString(c)))
+        result.append(("Ult initial raw damage".localizedString(), calculator.ultInitialRawDamage.string()))
         
-        let d = calculator.bAbilitySlowAtEdge
-        result.append(("Slow on the edge".localizedString(), percentageString(d)))
-        
-        let e = calculator.bAbilityCooldown
-        result.append(("Cooldown".localizedString(), roundedString(e)))
-        
-        let g = calculator.ultInitialDamage
-        result.append(("Ult initial damage".localizedString(), g.string()))
-        
-        let h = calculator.ultTotalDamage
-        result.append(("Ult total damage".localizedString(), h.string()))
+        result.append(("Ult total raw damage".localizedString(), calculator.ultTotalRawDamage.string()))
         
         return result
 

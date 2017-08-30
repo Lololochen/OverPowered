@@ -44,9 +44,9 @@ class Item: Namable {
     static let luckyStrike = Item(name: "Lucky Strike", price: 900, critChance: 0.2, critDamage: 0.15)
     static let sorrowBlade = Item(name: "Sorrow Blade", price: 3100, weaponPower: 150)
     static let serpentMask = Item(name: "Serpent Mast", price: 2800, weaponPower: 85)
-    static let poisonedShiv = Item(name: "Poisoned Shiv", price: 2250, weaponPower: 35, attackSpeed: 0.3)
+    static let poisonedShiv = Item(name: "Poisoned Shiv", price: 2250, weaponPower: 30, attackSpeed: 0.3)
     static let breakingPoint = Item(name: "Breaking Point", price: 2600, weaponPower: 55, attackSpeed: 0.2)
-    static let tensionBow = Item(name: "Tension Bow", price: 2150, weaponPower: 45, armorPierce: 0.12)
+    static let tensionBow = Item(name: "Tension Bow", price: 2150, weaponPower: 45, armorPierce: 0.1)
     static let bonesaw = Item(name: "Bonesaw", price: 2700, weaponPower: 15, attackSpeed: 0.25, armorPierce: 0.08)
     static let tornadoTrigger = Item(name: "Tornado Trigger", price: 2800, attackSpeed: 0.4, critChance:0.35, critDamage: 0.2)
     static let tyrantsMonocle = Item(name: "Tyrants Monocle", price: 2750, weaponPower: 60, critChance: 0.35, critDamage: 0.15)
@@ -93,7 +93,7 @@ class Item: Namable {
     static let contraption = Item(name: "Contraption", price: 2100, cooldownReduction: 0.4, health: 350, energyRecharge: 3)
     static let stormguardBanner = Item(name: "Stormguard Banner", price: 850, health: 200)
     static let slumberingHusk = Item(name: "Slumbering Hust", price: 1700, health: 500)
-    static let nullwaveGauntlet = Item(name: "Nullwave Gauntlet", price: 2400, cooldownReduction: 0.25, health: 400, energyRecharge: 4)
+    static let nullwaveGauntlet = Item(name: "Nullwave Gauntlet", price: 2200, cooldownReduction: 0.25, health: 400, energyRecharge: 4)
 
     
     static let weaponItems = [weaponBlade, swiftShooter, bookOfEulogies, minionsFoot, heavySteel, sixSins, barbedNeedle, piercingSpear, blazingSalvo, luckyStrike, sorrowBlade, serpentMask, tensionBow, bonesaw, tornadoTrigger, tyrantsMonocle, poisonedShiv, breakingPoint]

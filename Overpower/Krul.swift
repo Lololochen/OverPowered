@@ -25,7 +25,7 @@ struct Krul {
         return dataSource.attacker.heroPower.ultTier
     }
     
-    let aAbilityCdPerTier: [Int : Double] = [1 : 9, 2 : 9, 3 : 9, 4 : 9, 5 : 8]
+    let aAbilityCdPerTier: [Int : Double] = [1 : 8, 2 : 8, 3 : 8, 4 : 8, 5 : 7]
     let aAbilityBarrierPerTier: [Int : Double] = [1 : 100, 2 : 180, 3 : 260, 4 : 340, 5 : 420]
     let aAbilityCpRatio = 0.7
     let aAbilityBarrierCrystalRatio = 1.25
@@ -47,11 +47,14 @@ struct Krul {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawWeaponDamage: Double {
+        let originalDamage = BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit
+        return originalDamage * 1.6
+    }
+    
+    var aAbilityRawCrystalDamage: Double {
         let x = dataSource.attacker.crystalPower * aAbilityCpRatio
-        let bonusCrystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
-        return bonusCrystalDamage + basicAttackDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityBarrier: Double {
@@ -64,42 +67,34 @@ struct Krul {
     
     //B ability
     
-    var bAbilityWeaknessDuration: Double {
-        return 4 + dataSource.attacker.crystalPower * 0.005
+    var bAbilityNoStackRawDamage: Double {
+        let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityNoStackDamage: Double {
-        let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+    var bAbilityRawDamagePerStack: Double {
+        let x = bAbilityDamagePerStackPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDamagePerStackCrystalRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var bAbilityFullStackRawDamage: Double {
+        return bAbilityRawDamagePerStack * 8 + bAbilityNoStackRawDamage
     }
     
     var bAbilityNoStackHeal: Double {
         return bAbilityHealPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityHealCrystalRatio
     }
     
-    var bAbilityDamagePerStack: Double {
-        let x = bAbilityDamagePerStackPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDamagePerStackCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
     var bAbilityHealPerStack: Double {
         return bAbilityHealPerStackPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityHealPerStackCrystalRatio
     }
     
-    var bAbilityThreeStackDamage: Double {
-        return bAbilityDamagePerStack * 4 + bAbilityNoStackDamage
-    }
-    
-    var bAbilityFullStackDamage: Double {
-        return bAbilityDamagePerStack * 8 + bAbilityNoStackDamage
-    }
-    
-    var bAbilityThreeStackHeal: Double {
-        return bAbilityHealPerStack * 4 + bAbilityNoStackHeal
-    }
-    
     var bAbilityFullStackHeal: Double {
         return bAbilityHealPerStack * 8 + bAbilityNoStackHeal
+    }
+    
+    var bAbilityWeaknessDuration: Double {
+        return 4 + dataSource.attacker.crystalPower * 0.005
     }
     
     var bAbilityCooldown: Double {
@@ -108,9 +103,9 @@ struct Krul {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultMaxStunDuration: Double {

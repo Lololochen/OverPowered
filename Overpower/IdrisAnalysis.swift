@@ -18,19 +18,19 @@ class IdrisAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability amplified basic attack damage".localizedString(), calculator.AbilityAmplifiedDamage.string()))
+        result.append(("A ability barrier".localizedString(), calculator.aAbilityBarrier.string()))
         
-        result.append(("Health barrier".localizedString(), calculator.AbilityBarrier.string()))
+        result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("Cooldown".localizedString(), roundedString(calculator.AbilityCooldown)))
+        result.append(("Miminum cooldown in fight (basic attacking enemy non-stop)".localizedString(), roundedString(calculator.aAbilityCooldownInFight)))
         
-        result.append(("Miminum cooldown in fight (basic attacking enemy non-stop)".localizedString(), roundedString(calculator.AbilityCooldownInFight)))
+        result.append(("B ability raw crystal damage".localizedString(), calculator.bAbilityRawCrystalDamage.string()))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability raw weapon damage".localizedString(), calculator.bAbilityRawWeaponDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw weapon damage".localizedString(), calculator.ultRawWeaponDamage.string()))
         
         return result
     }

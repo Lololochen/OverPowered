@@ -37,16 +37,23 @@ struct Baron {
     
     //A ability
     
-    var aAbilityDamage: Double {
-        let crystalStrength = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.9
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * 0.7
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        return crystalDamage + weaponDamage
+    var aAbilityRawCrystalDamage: Double {
+        let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.9
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
-    var aAbilityMaxDPS: Double {
-        return aAbilityDamage / aAbilityChargeTime
+    
+    var aAbilityRawWeaponDamage: Double {
+        return dataSource.attacker.buildPower.weaponPower * 0.7
     }
+    
+    var aAbilityMaxRawCrystalDPS: Double {
+        return aAbilityRawCrystalDamage / aAbilityChargeTime
+    }
+    
+    var aAbilityMaxRawWeaponDPS: Double {
+        return aAbilityRawWeaponDamage / aAbilityChargeTime
+    }
+    
     var aAbilityRange: Double {
         let optimalRange = 8 + dataSource.attacker.crystalPower * 0.015
         if optimalRange > 11 {
@@ -55,14 +62,16 @@ struct Baron {
             return optimalRange
         }
     }
-    var aAbilitySlow: Double {
+    
+    var aAbilitySlowFactor: Double {
         let optimalSlow = 0.35 + 0.3 / 200 * dataSource.attacker.weaponPower
         if optimalSlow > 0.65 {
-            return 0.65
+            return 0.65 * 1.1
         } else {
-            return optimalSlow
+            return optimalSlow * 1.1
         }
     }
+    
     var aAbilityChargeTime: Double {
         return aAbilityCooldownPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
@@ -77,39 +86,30 @@ struct Baron {
             return optimalRange
         }
     }
-    var bAbilityTwoShotDamage: Double {
-        return BasicAttackDamage(dataSource: dataSource).damage * 2
-    }
+    
     var bAbilitySpeedBoost: Double {
         return bAbilitySpeedBoostPerTier[bAbilityTier]! + dataSource.attacker.weaponPower * 0.001
     }
+    
     var bAbilityCooldown: Double {
         return bAbilityCooldownPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
+    
     var bAbilityCooldownInFight: Double {
-        let cdrPerHit = 0.125 * bAbilityCooldown
-        return bAbilityCooldown / (cdrPerHit + DPSCalculator(dataSource: dataSource).maxHitsPerSec)
+        let cdrPercentagePerHit = 0.125
+        let landingCooldown = bAbilityCooldown * 0.875
+        return landingCooldown / (1 + cdrPercentagePerHit * bAbilityCooldown * (BasicAttackDamage(dataSource: dataSource).maxHitsPerSec))
     }
 
-    //ult
+    // ult
     
-    var ultDamageInCenter: Double {
-        let crystalStrength = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 2.25
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * 1.2
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        return crystalDamage + weaponDamage
+    var ultRawCrystalDamage: Double {
+        let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 2.25
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultDamageOnTheEdge: Double {
-        return ultDamageInCenter * 0.65
+    var ultRawWeaponDamage: Double {
+        return dataSource.attacker.buildPower.weaponPower * 1.2
     }
     
-    var ultRange: Double {
-        return ultRangePerTier[ultTier]!
-    }
-    
-    var ultBasicAttackRange: Double {
-        return ultBasicAttackRangePerTier[ultTier]!
-    }
 }

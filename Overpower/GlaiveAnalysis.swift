@@ -18,23 +18,17 @@ class GlaiveAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
-        
-        result.append(("Damage with a basic attack".localizedString(), calculator.aAbilityDamageWithBasicAttack.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
-        
-        result.append(("AOE damage".localizedString(), calculator.bAbilityAoeDamage.string()))
+        result.append(("B ability raw damage".localizedString(), calculator.bAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult full stack damage".localizedString(), calculator.ultFullStackDamage.string()))
+        result.append(("Ult full stack raw damage".localizedString(), calculator.ultFullStackRawDamage.string()))
         
-        result.append(("Damage with no stack".localizedString(), calculator.ultDamageWithoutStack.string()))
-        
-        result.append(("A ➝ basic attack (without Aftershock effect) ➝ B ➝ full stack Ult combo damage".localizedString(), (calculator.aAbilityDamageWithBasicAttack + calculator.bAbilityDamage + calculator.ultFullStackDamage).string()))
+        result.append(("Raw damage with no stack".localizedString(), calculator.ultRawDamageWithNoStack.string()))
         
         result.append(("Cooldown".localizedString(), calculator.ultCooldown.string()))
         

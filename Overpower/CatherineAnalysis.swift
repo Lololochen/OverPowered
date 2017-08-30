@@ -18,21 +18,17 @@ class CatherineAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability bubble burning DPS".localizedString(), calculator.bAbilityDps.string()))
+        result.append(("B ability bubble burning raw DPS".localizedString(), calculator.bAbilityRawDps.string()))
         
         result.append(("Minimum deflectable damage".localizedString(), calculator.bAbilityMinimumReflexableDamage.string()))
-        
-        result.append(("Minimum deflection damage".localizedString(), calculator.bAbilityMinimumReflexDamage.string()))
-        
+    
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Silence duration".localizedString(), roundedString(calculator.ultSilenceDuration)))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

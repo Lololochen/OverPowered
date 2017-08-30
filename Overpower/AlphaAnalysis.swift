@@ -24,23 +24,21 @@ class AlphaAnalysis: AbilityAnalysis {
         
         result.append(("Minimum enemy DPS to stop the reboot".localizedString(), calculator.ultLethalDPS.string()))
         
-        result.append(("A ability no stack damage".localizedString(), calculator.aAbilityNoStackDamage.string()))
+        result.append(("A ability no stack raw crystal damage".localizedString(), calculator.aAbilityNoStackRawCrystalDamage.string()))
         
-        result.append(("Full stack damage".localizedString(), calculator.aAbilityFullStackDamage.string()))
+        result.append(("A ability no stack raw weapon damage".localizedString(), calculator.aAbilityNoStackRawWeaponDamage.string()))
+        
+        result.append(("Full stack raw crystal damage".localizedString(), calculator.aAbilityFullStackRawCrystalDamage.string()))
+        
+        result.append(("Full stack raw weapon damage".localizedString(), calculator.aAbilityFullStackRawWeaponDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Max heal per second (lifesteal effects not added)".localizedString(), calculator.bAbilityMaxHealPerSec.string()))
+        result.append(("B ability Miminum cooldown with basic attacks".localizedString(), roundedString(calculator.bAbilityMimimumCooldownInFight)))
         
-        result.append(("Full stack damage".localizedString(), calculator.bAbilityFullStackDamage.string()))
-        
-        result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
-        
-        result.append(("Miminum cooldown in fight (basic attacking enemy non-stop)".localizedString(), roundedString(calculator.bAbilityMimimumCooldownInFight)))
-        
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

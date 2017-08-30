@@ -18,26 +18,20 @@ class CelesteAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability initial damage".localizedString(), calculator.aAbilitySmallStarDamage.string()))
+        result.append(("A ability initial raw damage".localizedString(), calculator.aAbilityInitialRawDamage.string()))
         
-        result.append(("Supernova damage".localizedString().localizedString(), calculator.aAbilityNovaDamage.string()))
+        result.append(("A ability explosion raw damage".localizedString().localizedString(), calculator.aAbilityExplosionRawDamage.string()))
         
         result.append(("A ability cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
-        
-        result.append(("Stun duration".localizedString(), roundedString(calculator.bAbilityStunDuration)))
+        result.append(("B ability raw damage".localizedString(), calculator.bAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), calculator.bAbilityCooldown.string()))
         
-        result.append(("Ult lead star damage".localizedString(), calculator.ultLeadStarDamage.string()))
+        result.append(("Ult lead star raw damage".localizedString(), calculator.ultLeadStarRawDamage.string()))
         
-        result.append(("Small star damage".localizedString(), calculator.ultSmallerStarDamage.string()))
-        
-        result.append(("3 small star damage".localizedString(), (calculator.ultSmallerStarDamage * 3).string()))
-        
-        result.append(("3 stars damage with lead star".localizedString(), (calculator.ultLeadStarDamage + calculator.ultSmallerStarDamage * 2).string()))
-        
+        result.append(("Small star raw damage".localizedString(), calculator.ultSmallerStarRawDamage.string()))
+    
         return result
     }
 }

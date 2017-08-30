@@ -18,15 +18,13 @@ class SawAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage on full health target".localizedString(), calculator.aAbilityDamageOnFullHealthEnemy.string()))
-        
-        result.append(("Can kill enemy with health lower than".localizedString(), percentageString(calculator.aAbilityExecutableHealthPercentage)))
+        result.append(("A ability can kill enemy with health lower than".localizedString(), percentageString(calculator.aAbilityExecutableHealthPercentage)))
         
         result.append(("Speed boost".localizedString(), roundedString(calculator.aAbilitySpeedBoost)))
         
         result.append(("A ability cooldown".localizedString(), calculator.aAbilityCooldown.string()))
         
-        result.append(("B ability total damage".localizedString(), calculator.bAbilityTotalDamage.string()))
+        result.append(("B ability raw DPS".localizedString(), calculator.bAbilityRawDPS.string()))
         
         result.append(("Slow duration".localizedString(), roundedString(calculator.bAbilitySlowDuration)))
         

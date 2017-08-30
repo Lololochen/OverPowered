@@ -18,20 +18,16 @@ class JouleAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage with pierce".localizedString(), calculator.bAbilityDamageWithPierce.string()))
+        result.append(("B ability raw weapon DPS".localizedString(), calculator.bAbilityRawWeaponDPS.string()))
         
-        result.append(("Damage without pierce".localizedString(), calculator.bAbilityDamageWithoutPierce.string()))
+        result.append(("B ability raw crystal DPS".localizedString(), calculator.bAbilityRawCrystalDPS.string()))
         
-        result.append(("B ability DPS with basic attacks".lowercased(), calculator.bAbilityDpsWithBasicAttacks.string()))
-        
-        result.append(("Ult DPS".localizedString(), calculator.ultDps.string()))
-        
-        result.append(("Total damage".localizedString(), calculator.ultDamage.string()))
-        
+        result.append(("Ult raw DPS".localizedString(), calculator.ultRawDPS.string()))
+                
         return result
     }
 }

@@ -29,13 +29,12 @@
 		5636FC941E694E4400A92F7B /* BuildPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636FC931E694E4400A92F7B /* BuildPower.swift */; };
 		5636FC961E6950AA00A92F7B /* HeroPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636FC951E6950AA00A92F7B /* HeroPower.swift */; };
 		5639BC801E80C60400C0E91E /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5639BC7F1E80C60400C0E91E /* ConversationVC.swift */; };
-		563E60031E69604A00844C6A /* DPSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E60021E69604A00844C6A /* DPSCalculator.swift */; };
 		5641064F1E70236900F55206 /* SelectBuildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5641064B1E7015EE00F55206 /* SelectBuildView.swift */; };
 		564106511E7042AA00F55206 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564106501E7042AA00F55206 /* Assets.xcassets */; };
 		564722001DF6BC2F00665395 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562F22491D80345C007D9C9F /* Main.storyboard */; };
 		564F826E1E7BD4CE006F7D48 /* BasicAttackDamage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F826D1E7BD4CE006F7D48 /* BasicAttackDamage.swift */; };
 		566090BA1E83C9BA00804610 /* Vox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566090B91E83C9BA00804610 /* Vox.swift */; };
-		566090C61E83F4B900804610 /* DamageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566090C51E83F4B900804610 /* DamageCalculator.swift */; };
+		566090C61E83F4B900804610 /* OldDamageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566090C51E83F4B900804610 /* OldDamageCalculator.swift */; };
 		56706B9D1DDC354900863B59 /* Digital.otf in Resources */ = {isa = PBXBuildFile; fileRef = 56706B9C1DDC354900863B59 /* Digital.otf */; };
 		5672FF531EB4406D00D41F97 /* Baptiste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672FF521EB4406D00D41F97 /* Baptiste.swift */; };
 		5672FF551EB443F200D41F97 /* BaptisteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672FF541EB443F200D41F97 /* BaptisteAnalysis.swift */; };
@@ -184,7 +183,6 @@
 		5636FC931E694E4400A92F7B /* BuildPower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildPower.swift; sourceTree = "<group>"; };
 		5636FC951E6950AA00A92F7B /* HeroPower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPower.swift; sourceTree = "<group>"; };
 		5639BC7F1E80C60400C0E91E /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
-		563E60021E69604A00844C6A /* DPSCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPSCalculator.swift; sourceTree = "<group>"; };
 		5641064B1E7015EE00F55206 /* SelectBuildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectBuildView.swift; sourceTree = "<group>"; };
 		564106501E7042AA00F55206 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		564F826D1E7BD4CE006F7D48 /* BasicAttackDamage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAttackDamage.swift; sourceTree = "<group>"; };
@@ -192,7 +190,7 @@
 		566090B71E83BE8800804610 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		566090B81E83BE9B00804610 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		566090B91E83C9BA00804610 /* Vox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vox.swift; sourceTree = "<group>"; };
-		566090C51E83F4B900804610 /* DamageCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamageCalculator.swift; sourceTree = "<group>"; };
+		566090C51E83F4B900804610 /* OldDamageCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldDamageCalculator.swift; sourceTree = "<group>"; };
 		56706B8A1DDB350200863B59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		56706B9C1DDC354900863B59 /* Digital.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Digital.otf; sourceTree = "<group>"; };
 		5672FF521EB4406D00D41F97 /* Baptiste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baptiste.swift; sourceTree = "<group>"; };
@@ -467,12 +465,11 @@
 			children = (
 				568822201E76C8FA00BB956C /* CommunicationModel.swift */,
 				560F1E231E7D5B4600977C2E /* FoundationExtension.swift */,
+				564F826D1E7BD4CE006F7D48 /* BasicAttackDamage.swift */,
 				561DBDB31E923A6E006F5ED2 /* AbilityAnalysis.swift */,
 				563E60061E69A0FC00844C6A /* AbilityCalculators */,
 				5657C2AF1D8A865500780F54 /* Data Models */,
-				563E60021E69604A00844C6A /* DPSCalculator.swift */,
-				564F826D1E7BD4CE006F7D48 /* BasicAttackDamage.swift */,
-				566090C51E83F4B900804610 /* DamageCalculator.swift */,
+				566090C51E83F4B900804610 /* OldDamageCalculator.swift */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -662,7 +659,6 @@
 				56EE72A21F00EEAC00B24550 /* GraceAnalysis.swift in Sources */,
 				BEA117681F43142500D55036 /* Reim.swift in Sources */,
 				567719741E9764F00014F392 /* LyraAnalysis.swift in Sources */,
-				563E60031E69604A00844C6A /* DPSCalculator.swift in Sources */,
 				BED8BDB61F432B67009B4AD1 /* RezaAnalysis.swift in Sources */,
 				BEC4AE441F3EB68C0069DA16 /* Joule.swift in Sources */,
 				56C738C41F23076300997DAD /* PageVC.swift in Sources */,
@@ -727,7 +723,7 @@
 				5639BC801E80C60400C0E91E /* ConversationVC.swift in Sources */,
 				56F865DC1E7901410040A9DA /* DialogView.swift in Sources */,
 				567719721E9764BF0014F392 /* LanceAnalysis.swift in Sources */,
-				566090C61E83F4B900804610 /* DamageCalculator.swift in Sources */,
+				566090C61E83F4B900804610 /* OldDamageCalculator.swift in Sources */,
 				567719841E9766A80014F392 /* SamuelAnalysis.swift in Sources */,
 				5677195C1E9762500014F392 /* CatherineAnalysis.swift in Sources */,
 				568822211E76C8FA00BB956C /* CommunicationModel.swift in Sources */,

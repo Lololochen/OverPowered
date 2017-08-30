@@ -25,7 +25,7 @@ struct Vox {
         return dataSource.attacker.heroPower.ultTier
     }
     
-    let aAbilityCDPerTier: [Int : Double] = [1 : 5, 2 : 4.5, 3 : 4, 4 : 3.5, 5 : 3]
+    let aAbilityCDPerTier: [Int : Double] = [1 : 6, 2 : 5.5, 3 : 5, 4 : 4.5, 5 : 4]
     let bAbilityCDPerTier: [Int : Double] = [1 : 10, 2 : 10, 3 : 10, 4 : 10, 5 : 7]
     let bounceDamageBonusPerTier: [Int : Double] = [1 : 20, 2 : 40, 3 : 60, 4 : 80, 5 : 120]
     let basicAttackDamageRatioPerTier: [Int : Double] = [1 : 0.5, 2 : 0.5, 3 : 0.5, 4 : 0.5, 5 : 0.6]
@@ -34,52 +34,30 @@ struct Vox {
     let ultInitialDamagePerTier: [Int : Double] = [1 : 100, 2 : 150, 3 : 200]
     let shockwaveDamagePerTier: [Int : Double] = [1 : 100, 2 : 150, 3 : 200]
     
-    var maxHitsPerSec: Double {
-        return DPSCalculator(dataSource: dataSource).maxHitsPerSec + basicAttackDamageRatioPerTier[aAbilityTier]! * 2 / aAbilityCDPerTier[aAbilityTier]!
-    }
-
-    var dpsWithAAbility: Double {
-        let weaponDamagePerHit = BasicAttackDamage(dataSource: dataSource).weaponDamagePerHit
-        let crystalDamagePerHit = BasicAttackDamage(dataSource: dataSource).crystalDamagePerHit
-        
-        let weaponDPS = maxHitsPerSec * weaponDamagePerHit
-        let crystalDPS = crystalDamagePerHit * maxHitsPerSec
-        
-        return weaponDPS + crystalDPS
-    }
-    
     var aAbilityCooldown: Double {
         return aAbilityCDPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var bounceDPS: Double {
-        let bounceHitsPerSec = DPSCalculator(dataSource: dataSource).maxHitsPerSec +  2 / aAbilityCDPerTier[aAbilityTier]!
+    var bounceRawDPS: Double {
+        let bounceHitsPerSec = BasicAttackDamage(dataSource: dataSource).maxHitsPerSec +  2 / aAbilityCDPerTier[aAbilityTier]!
         let bounceDamage = 20 + bounceDamageBonusPerTier[bAbilityTier]! + 0.9 * dataSource.attacker.crystalPower
-        let trueDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(bounceDamage)
+        let trueDamage = bounceDamage * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
         return trueDamage * bounceHitsPerSec
-    }
-    
-    var bAbilitySlowAtCenter: Double {
-        return slowAtCenterPerTier[bAbilityTier]!
-    }
-    
-    var bAbilitySlowAtEdge: Double {
-        return slowAtEdgePerTier[bAbilityTier]!
     }
     
     var bAbilityCooldown: Double {
         return bAbilityCDPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var ultInitialDamage: Double {
+    var ultInitialRawDamage: Double {
         let x = ultInitialDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 0.2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultTotalDamage: Double {
+    var ultTotalRawDamage: Double {
         let x = shockwaveDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 0.4
-        let shockwaveDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return shockwaveDamage + ultInitialDamage
+        let shockwaveDamage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        return shockwaveDamage + ultInitialRawDamage
     }
     
 }

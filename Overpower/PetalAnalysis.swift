@@ -18,11 +18,9 @@ class PetalAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("Pet DPS".localizedString(), calculator.aAbilityPetDPS.string()))
+        result.append(("Pet raw DPS".localizedString(), calculator.aAbilityPetRawDPS.string()))
         
-        result.append(("DPS with basic attacks".localizedString(), calculator.aAbilityDpsWithAutoAttack.string()))
-        
-        result.append(("Seed explosion damage".localizedString(), calculator.aAbilitySeedExplosionDamage.string()))
+        result.append(("Seed explosion raw damage".localizedString(), calculator.seedExplosionRawDamage.string()))
         
         result.append(("Pet health".localizedString(), calculator.aAbilityPetHealth.string()))
         
@@ -30,19 +28,11 @@ class PetalAnalysis: AbilityAnalysis {
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability amplified DPS".localizedString(), (calculator.bAbilitAmplifier * calculator.aAbilityDpsWithAutoAttack).string()))
+        result.append(("B ability cooldown".localizedString(), roundedString(calculator.bAbilitCooldown)))
         
-        result.append(("Total damage during amplification".localizedString(), ((calculator.bAbilitAmplifier * calculator.aAbilityDpsWithAutoAttack) * 4).string()))
+        result.append(("Ult single explosion raw damage".localizedString(), calculator.ultRawDamagePerPet.string()))
         
-        result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilitCooldown)))
-        
-        result.append(("Ult total damage".localizedString(), calculator.ultTotalDamage.string()))
-        
-        result.append(("Single explosion damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Total heal".localizedString(), calculator.ultTotalHeal.string()))
-        
-        result.append(("Single explosion heal".localizedString(), calculator.ultHeal.string()))
+        result.append(("Ult single explosion heal".localizedString(), calculator.ultHealPerPet.string()))
         
         result.append(("Charge time".localizedString(), calculator.ultChargeTime.string()))
         

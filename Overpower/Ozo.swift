@@ -43,17 +43,15 @@ struct Ozo {
     
     //A ability
     
-    var aAbilityDamagePerHit: Double {
+    var aAbilityRawWeaponDamagePerHit: Double {
         let boostedWeaponPower = dataSource.attacker.weaponPower + aAbilityDamagePerTier[aAbilityTier]!
         let weaponPowerWithCrit = boostedWeaponPower * (1 + dataSource.attacker.critDamage) * dataSource.attacker.critChance + boostedWeaponPower * (1 - dataSource.attacker.critChance)
-        let weaponDamagePerHit = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponPowerWithCrit)
-        
-        var crystalPowerWithBonus = aAbilityCpRatio * dataSource.attacker.crystalPower
-        if dataSource.attacker.buildPower.build.contains(Item.alternatingCurrent) {
-            crystalPowerWithBonus += dataSource.attacker.crystalPower * 0.35
-        }
-        let crystalDamagePerHit = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalPowerWithBonus)
-        return weaponDamagePerHit + crystalDamagePerHit
+        return weaponPowerWithCrit
+    }
+    
+    var aAbilityRawCrystalDamagePerHit: Double {
+        let x = aAbilityCpRatio * dataSource.attacker.crystalPower
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityHealPerHitPerEnemy: Double {
@@ -66,16 +64,16 @@ struct Ozo {
     
     //B ability
     
-    var bAbilityFirstTwoBounceDamage: Double {
+    var bAbilityFirstTwoBounceRawDamage: Double {
         let x = bAbilityInitialDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.7
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityThirdBounceDamage: Double {
+    var bAbilityThirdBounceRawDamage: Double {
         let damage1 = bAbilityFinalDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.7
         let damage2 = (bAbilityBonusDamagePerBouncePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.35) * 2
         let x = damage1 + damage2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilitySpeedBoost: Double {
@@ -97,13 +95,13 @@ struct Ozo {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultSecondaryDamage: Double {
+    var ultSecondaryTargetRawDamage: Double {
         let x = ultSecondaryTargetDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 0.75
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
 }

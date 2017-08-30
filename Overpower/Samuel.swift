@@ -44,15 +44,18 @@ struct Samuel {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamagePerHit: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityWithEmpoweredDamage: Double {
+    var rawEmpowerDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        let empoweredDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return aAbilityDamage + empoweredDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var empoweredRawDPS: Double {
+        return aAbilityRawDamagePerHit + rawEmpowerDamage
     }
     
     var aAbilityCooldown: Double {
@@ -61,9 +64,9 @@ struct Samuel {
     
     //B ability
     
-    var bAbilityDps: Double {
+    var bAbilityRawDps: Double {
         let x = bAbilityDpsPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityHealPerSecPerTarget: Double {
@@ -80,12 +83,9 @@ struct Samuel {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultSleepDuration: Double {
-        return ultSleepDurationPerTier[ultTier]!
-    }
 }

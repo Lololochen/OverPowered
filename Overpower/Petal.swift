@@ -50,23 +50,18 @@ struct Petal {
         return aAbilityPetDefensePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 0.005
     }
     
-    var aAbilityPetDPS: Double {
+    var aAbilityPetRawDPS: Double {
         let x = aAbilityPetDefensePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 0.4
-        let damage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        let damage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
         let hitsPerSec = 1.0
         // doesn't scale with attack speed or cooldown, like fortress' wolves
         let dpsPerPet = damage * hitsPerSec
         return dpsPerPet * 3
     }
     
-    var aAbilityDpsWithAutoAttack: Double {
-        let dps = DPSCalculator(dataSource: dataSource).dps
-        return dps + aAbilityPetDPS
-    }
-    
-    var aAbilitySeedExplosionDamage: Double {
+    var seedExplosionRawDamage: Double {
         let x = aAbilitySeedDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -75,31 +70,19 @@ struct Petal {
     
     //B ability
     
-    var bAbilitAmplifier: Double {
-        return 1 + bAbilitAmplifierPerTier[bAbilityTier]!
-    }
-    
     var bAbilitCooldown: Double {
         return bAbilitCdPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamagePerPet: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultTotalDamage: Double {
-        return ultDamage * 3
-    }
-    
-    var ultHeal: Double {
+    var ultHealPerPet: Double {
         return ultHealPerTier[ultTier]! * ultHealCrystalRatio
-    }
-    
-    var ultTotalHeal: Double {
-        return ultHeal * 3
     }
     
     var ultChargeTime: Double {

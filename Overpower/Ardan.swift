@@ -45,11 +45,7 @@ struct Ardan {
     
     var aAbilityDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var aAbilityRange: Double {
-        return aAbilityRangePerTier[aAbilityTier]!
+        return x  * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityBarrier: Double {
@@ -62,14 +58,9 @@ struct Ardan {
     
     //B ability
     
-    var bAbilityCpDamage: Double {
+    var bAbilityRawCrystalDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityDamage: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
-        return bAbilityCpDamage + basicAttackDamage
+        return x  * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -80,7 +71,7 @@ struct Ardan {
     
     var ultDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x  * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultDuration: Double {

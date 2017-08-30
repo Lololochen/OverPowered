@@ -39,18 +39,24 @@ struct Gwen {
     let ultWpRatio: Double = 1
     let ultCpRatio: Double = 2.4
     
-    //A ability
-    
-    var aAbilityDamage: Double {
-        let weaponStrength = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = dataSource.attacker.crystalPower * aAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var empoweredBasicAttackRawWeaponDamage: Double {
+        let originalDamage = BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit
+        return 80 / 11 * Double(dataSource.attacker.heroPower.level!) + 30 + originalDamage * 1.35
     }
     
-    var aAbilitySlowStrength: Double {
-        return aAbilitySlowPerTier[aAbilityTier]!
+    //A ability
+    
+    var aAbilityRawCrystalDamage: Double {
+        let x = dataSource.attacker.crystalPower * aAbilityCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var aAbilityRawWeaponDamage: Double {
+        return aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
+    }
+    
+    var aAbilitySlowFactor: Double {
+        return aAbilitySlowPerTier[aAbilityTier]! * 1
     }
     
     var aAbilityCooldown: Double {
@@ -59,7 +65,7 @@ struct Gwen {
     
     //B ability
     
-    var bAbilitySpeedBoost: Double {
+    var bAbilitySpeedBoostDistance: Double {
         return bAbilitySpeedBoostPerTier[bAbilityTier]!
     }
     
@@ -69,15 +75,13 @@ struct Gwen {
     
     //ult
     
-    var ultDamage: Double {
-        let weaponStrength = ultDamagePerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * ultWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = dataSource.attacker.crystalPower * ultCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var ultRawCrystalDamage: Double {
+        let x = dataSource.attacker.crystalPower * ultCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultStunDuration: Double {
-        return ultStunDurationPerTier[ultTier]!
+    var ultRawWeaponDamage: Double {
+        return ultDamagePerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * ultWpRatio
     }
+    
 }

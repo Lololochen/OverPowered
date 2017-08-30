@@ -18,17 +18,17 @@ class ArdanAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability barrier".localizedString(), calculator.aAbilityBarrier.string()))
+        result.append(("A ability Raw crystal Damage".localizedString(), calculator.aAbilityDamage.string()))
         
-        result.append(("Damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("Barrier".localizedString(), calculator.aAbilityBarrier.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability raw crystal damage".localizedString(), calculator.bAbilityRawCrystalDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw crystal damage".localizedString(), calculator.ultDamage.string()))
         
         return result
     }

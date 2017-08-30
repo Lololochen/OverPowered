@@ -28,7 +28,7 @@ struct Catherine {
     let aAbilityCdPerTier: [Int : Double] = [1 : 14, 2 : 13.5, 3 : 13, 4 : 12.5, 5 : 12]
     let aAbilityEnergyCostPerTier: [Int : Double] = [1 : 40, 2 : 50, 3 : 60, 4 : 70, 5 : 90]
     let aAbilityCpRatio = 1.0
-    let aAbilityDamagePerTier: [Int : Double] = [1 : 35, 2 : 70, 3 : 105, 4 : 140, 5 : 175]
+    let aAbilityDamagePerTier: [Int : Double] = [1 : 35, 2 : 60, 3 : 85, 4 : 110, 5 : 135]
     let aAbilityStunDurationPerTier: [Int : Double] = [1 : 1, 2 : 1, 3 : 1, 4 : 1, 5 : 1]
     
     let bAbilityCdPerTier: [Int : Double] = [1 : 7, 2 : 6.5, 3 : 6, 4 : 5.5, 5 : 5]
@@ -41,12 +41,9 @@ struct Catherine {
     let ultCpRatio = 1.3
     
     //A ability
-    
-    var aAbilityDamage: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
+    var aAbilityRawCrystalDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        let bonusDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return basicAttackDamage + bonusDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -55,17 +52,13 @@ struct Catherine {
     
     //B ability
     
-    var bAbilityDps: Double {
+    var bAbilityRawDps: Double {
         let x = bAbilityDpsPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityMinimumReflexableDamage: Double {
         return 0.1 * dataSource.attacker.health
-    }
-    
-    var bAbilityMinimumReflexDamage: Double {
-        return bAbilityMinimumReflexableDamage * (bAbilityBonusReflectPerTier[bAbilityTier]! + 1)
     }
     
     var bAbilityCooldown: Double {
@@ -74,12 +67,9 @@ struct Catherine {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultSilenceDuration: Double {
-        return ultSilenceDurationPerTier[ultTier]!
-    }
 }

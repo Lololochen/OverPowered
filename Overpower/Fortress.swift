@@ -43,21 +43,9 @@ struct Fortress {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.1
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var aAbilitySpeedBoost: Double {
-        return aAbilitySpeedBoostPerTier[aAbilityTier]!
-    }
-    
-    var aAbilityDuration: Double {
-        return aAbilityDurationPerTier[aAbilityTier]!
-    }
-    
-    var aAbilityLifeSteal: Double {
-        return aAbilityLifeStealPerTier[aAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -66,14 +54,9 @@ struct Fortress {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityOnHitRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 0.7
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityFullStackDamage: Double {
-        let x = (bAbilityPercentMaxHealthDamagePerTier[bAbilityTier]!) * dataSource.defender.health + dataSource.attacker.crystalPower * 0.05
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -82,33 +65,18 @@ struct Fortress {
     
     //ult
     
-    var ultDuration: Double {
-        return ultDurationPerTier[ultTier]!
-    }
-    
-    var ultAttackSpeedIncrease: Double {
-        return ultAttackSpeedIncreasePerTier[ultTier]!
-    }
-    
-    var ultFortifiedHealth: Double {
-        return ultFortifiedHealthPerTier[ultTier]!
-    }
-    
-    var ultBleedDamagePerSec: Double {
+    var bleedRawDPS: Double {
         let x = 10 + dataSource.attacker.crystalPower * 0.15
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultWolfDPS: Double {
+    var ultWolfRawDPS: Double {
         let x = ultWolfAttackDamagePerTier[ultTier]!
-        return DamageCalculator(dataSource: dataSource).receivedWeaponDamage(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultDpsPerWolf: Double {
-        return ultBleedDamagePerSec + ultWolfDPS
+        return bleedRawDPS + ultWolfRawDPS
     }
-    
-    var ultBleedingStackAppliedPerSec: Double {
-        return 1
-    }
+
 }

@@ -18,23 +18,21 @@ class PhinnAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability damage".localizedString(), calculator.bAbilityDamage.string()))
+        result.append(("B ability raw damage".localizedString(), calculator.bAbilityRawDamage.string()))
         
         result.append(("Fortified health on allies".localizedString(), calculator.bAbilityFortifiedHealth.string()))
         
         result.append(("Armor increase on allies".localizedString(), calculator.bAbilityArmorIncrease.string()))
         
         result.append(("Shield increase on allies".localizedString(), calculator.bAbilityShieldIncrease.string()))
-        
-        result.append(("Duration".localizedString(), roundedString(calculator.bAbilityDuration)))
-        
+                
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
         
         return result
     }

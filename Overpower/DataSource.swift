@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DataSource {
+struct DataSource {
     
     var attacker = PlayerFightPower()
     var defender = PlayerFightPower()

@@ -18,27 +18,17 @@ class SkaarfAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
-        result.append(("Max DPS with basic attacks (assuming you land every shot)".localizedString(), calculator.aAbilityMaxDPSWithBasicAttacks.string()))
+        result.append(("A ability with basic attacks max raw crystal DPS".localizedString(), calculator.aAbilityWithBasicAttacksMaxRawCrystalDPS.string()))
         
-        result.append(("Fire ball travel time".localizedString(), roundedString(calculator.aAbilityFireBallTravelTime)))
+        result.append(("B ability ignite raw damage".localizedString(), calculator.bAbilityIgniteRawDamage.string()))
         
-        result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
-        
-        result.append(("B ability ignite damage".localizedString(), calculator.bAbilityIgniteDamage.string()))
-        
-        result.append(("Burning DPS".localizedString(), calculator.bAbilityDps.string()))
-        
-        result.append(("Burning duration".localizedString(), calculator.bAbilityBurnDuration.string()))
+        result.append(("Burning raw DPS".localizedString(), calculator.bAbilityBurnRawDPS.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("Ult DPS".localizedString(), calculator.ultDps.string()))
-        
-        result.append(("Total damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Fortified health".localizedString(), calculator.ultFortifiedHealth.string()))
+        result.append(("Ult raw DPS".localizedString(), calculator.ultRawDPS.string()))
         
         return result
 

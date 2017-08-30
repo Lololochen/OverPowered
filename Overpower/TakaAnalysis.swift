@@ -18,27 +18,17 @@ class TakaAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("A ability cooldown".localizedString(), calculator.aAbilityCooldown.string()))
         
-        result.append(("Cooldown on 5 Ki stacks".localizedString(), (calculator.aAbilityCooldown / 2).string()))
-        
-        result.append(("B ability stealth duration".localizedString(), calculator.bAbilityStealthDuration.string()))
-        
-        result.append(("Total heal".localizedString(), calculator.bAbilityHeal.string()))
+        result.append(("B ability total heal".localizedString(), calculator.bAbilityHeal.string()))
         
         result.append(("B ability cooldown".localizedString(), calculator.bAbilityCooldown.string()))
-        
-        result.append(("Cooldown on 5 Ki stacks".localizedString(), (calculator.bAbilityCooldown / 2).string()))
-        
-        result.append(("Ult total damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Bleed damage".localizedString(), calculator.ultBleedDamage.string()))
+
+        result.append(("Ult total raw damage".localizedString(), calculator.ultTotalRawDamage.string()))
         
         result.append(("Ult cooldown".localizedString(), calculator.ultCooldown.string()))
-        
-        result.append(("Cooldown on 5 Ki stacks".localizedString(), (calculator.ultCooldown / 2).string()))
         
         return result
 

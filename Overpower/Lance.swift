@@ -49,12 +49,13 @@ struct Lance {
     
     //A ability
     
-    var aAbilityDamage: Double {
-        let weaponStrength = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = dataSource.attacker.crystalPower * aAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var aAbilityRawWeaponDamage: Double {
+        return aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityWpRatio
+    }
+    
+    var aAbilityRawCrystalDamage: Double {
+        let x = dataSource.attacker.crystalPower * aAbilityCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityRootDuration: Double {
@@ -68,12 +69,13 @@ struct Lance {
     
     //B ability
     
-    var bAbilityDamage: Double {
-        let weaponStrength = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.buildPower.weaponPower * bAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = dataSource.attacker.crystalPower * bAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var bAbilityRawWeaponDamage: Double {
+        return bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.buildPower.weaponPower * bAbilityWpRatio
+    }
+    
+    var bAbilityRawCrystalDamage: Double {
+        let x = dataSource.attacker.crystalPower * bAbilityCpRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityStunDuration: Double {
@@ -97,11 +99,9 @@ struct Lance {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawBonusDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        let weaponDamage = BasicAttackDamage(dataSource: dataSource).damage
-        return weaponDamage + crystalDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultCooldown: Double {

@@ -41,9 +41,9 @@ struct Joule {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -52,44 +52,32 @@ struct Joule {
     
     //B ability
     
-    var bAbilityDamageWithoutPierce: Double {
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * bAbilityWpRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var hitsPerSec: Double{
+        return dataSource.attacker.attackSpeed / bAbilityCooldown
     }
     
-    var bAbilityDamageWithPierce: Double {
-        let weaponDamage = dataSource.attacker.buildPower.weaponPower * bAbilityWpRatio
-        var armorPierce = dataSource.attacker.armorPierce + bAbilityBonusPiercePerTier[bAbilityTier]!
-        if armorPierce > 1 { armorPierce = 1 }
-        let piercedWeaponDamage = weaponDamage / (1 + dataSource.defender.armor / 100) * (1 - armorPierce) + weaponDamage * armorPierce
-        
-        let crystalStrength = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        let crystalDamage = crystalStrength * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
-        var shieldPierce = dataSource.attacker.shieldPierce + bAbilityBonusPiercePerTier[bAbilityTier]!
-        if shieldPierce > 1 { shieldPierce = 1 }
-        let piercedCrystalDamage = crystalDamage / (1 + dataSource.defender.shield / 100) * (1 - shieldPierce) + crystalDamage * shieldPierce
-        
-        return piercedWeaponDamage + piercedCrystalDamage
+    var bAbilityRawWeaponDPS: Double {
+        var weaponPower = 0.0
+        if bAbilityTier == 5 {
+            weaponPower = BasicAttackDamage(dataSource: dataSource).weaponPowerWithCrit
+        } else {
+            weaponPower = dataSource.attacker.weaponPower
+        }
+        return weaponPower * bAbilityWpRatio * hitsPerSec
     }
     
-    var bAbilityDpsWithBasicAttacks: Double {
-        let hitsPerSec = dataSource.attacker.attackSpeed / bAbilityCooldown
-        let abilityDPS = bAbilityDamageWithPierce * hitsPerSec
-        let basicAttackDPS = DPSCalculator(dataSource: dataSource).dps
-        return abilityDPS + basicAttackDPS
+    var bAbilityRawCrystalDPS: Double {
+        let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
+        let rawDamagePerHit = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        return rawDamagePerHit * hitsPerSec
     }
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDPS: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        let totalRawDamage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        return totalRawDamage / 1.5
     }
-    
-    var ultDps: Double {
-        return ultDamage / 1.5
-    }
+
 }

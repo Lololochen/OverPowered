@@ -37,9 +37,9 @@ struct Taka {
     let ultCooldownPerTier: [Int : Double] = [1 : 20, 2 : 20, 3 : 20]
     
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 0.8
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -53,28 +53,24 @@ struct Taka {
             return (bAbilityHealPerSec[bAbilityTier]! + dataSource.attacker.crystalPower * 0.25) * 3
         }
     }
-    
-    var bAbilityStealthDuration: Double {
-        return bAbilityStealthDurationPerTier[bAbilityTier]!
-    }
-    
+
     var bAbilityCooldown: Double {
         return bAbilityCooldownPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * 0.2)
     }
     
-    var ultPrimaryDamage: Double {
+    var ultInitialRawDamage: Double {
         let x = ultPrimaryDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 1.7
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultBleedDamage: Double {
+    var ultBleedRawDamage: Double {
         let rawDamagePerSec = ultBleedPerSecPerTier[ultTier]! + dataSource.attacker.crystalPower * 0.7
         let rawDamage = rawDamagePerSec * 3
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(rawDamage)
+        return rawDamage * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultDamage: Double {
-        return ultPrimaryDamage + ultBleedDamage
+    var ultTotalRawDamage: Double {
+        return ultInitialRawDamage + ultBleedRawDamage
     }
     
     var ultCooldown: Double {

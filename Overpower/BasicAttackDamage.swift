@@ -27,7 +27,7 @@ struct BasicAttackDamage {
         return dataSource.attacker.weaponPower * (1 + dataSource.attacker.critDamage) * dataSource.attacker.critChance + dataSource.attacker.weaponPower * (1 - dataSource.attacker.critChance)
     }
         
-    private var rawWeaponDamagePerHit: Double {
+    var rawWeaponDamagePerHit: Double {
         if dataSource.attacker.heroPower.hero == Hero.idris && dataSource.attacker.crystalPower >= 125 && dataSource.attacker.isMeleeFighting == true {
             return weaponPowerWithCrit * 0.5
         }
@@ -40,7 +40,7 @@ struct BasicAttackDamage {
         return weaponPowerWithCrit
     }
     
-    private var rawCrystalDamagePerHit: Double {
+    var rawCrystalDamagePerHit: Double {
         var damage: Double = 0
         switch dataSource.attacker.heroPower.hero! {
             
@@ -53,7 +53,7 @@ struct BasicAttackDamage {
             damage += basicDamage + crystalRatioDamage
             
         case Hero.idris:
-            if dataSource.attacker.crystalPower >= 125 {
+            if dataSource.attacker.crystalPower >= 100 {
                 damage += dataSource.attacker.crystalPower * 1
             }
             
@@ -81,23 +81,20 @@ struct BasicAttackDamage {
         return damage * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var crystalDamagePerHit: Double {
-        let trueDamage = DamageCalculator(dataSource: dataSource).crystalDamage(rawCrystalDamagePerHit)
-        return DamageCalculator(dataSource: dataSource).receivedDamage(trueDamage)
+    var rawCritDamage: Double {
+        return dataSource.attacker.weaponPower * (1 + dataSource.attacker.critDamage)
     }
     
-    var weaponDamagePerHit: Double {
-        let trueDamage = DamageCalculator(dataSource: dataSource).weaponDamage(rawWeaponDamagePerHit)
-        return DamageCalculator(dataSource: dataSource).receivedDamage(trueDamage)
+    var maxHitsPerSec: Double {
+        return dataSource.attacker.attackSpeed / dataSource.attacker.attackCooldown
     }
     
-    var damage: Double {
-        return weaponDamagePerHit + crystalDamagePerHit
+    var rawWeaponDPS: Double {
+        return maxHitsPerSec * BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit
     }
     
-    var critDamage: Double {
-        let x = dataSource.attacker.weaponPower * (1 + dataSource.attacker.critDamage)
-        return DamageCalculator(dataSource: dataSource).receivedWeaponDamage(x)
+    var rawCrystalDPS: Double {
+        return BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit * maxHitsPerSec
     }
 
 }

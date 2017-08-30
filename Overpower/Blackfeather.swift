@@ -40,42 +40,9 @@ struct Blackfeather {
     
     //A ability
     
-    var aAbilityCrystalDamage: Double {
+    var aAbilityRawCrystalDamage: Double {
         let x = dataSource.attacker.crystalPower * 0.5
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var aAbilityBasicAttackDamage: Double {
-        return BasicAttackDamage(dataSource: dataSource).damage
-    }
-    
-    var aAbilityDamageWithoutHeartthrobStack: Double {
-        return aAbilityCrystalDamage + aAbilityBasicAttackDamage
-    }
-    
-    func aAbilityCalcDamageWithHealthPercentage(percentage: Double) -> Double {
-        let x = dataSource.attacker.weaponPower * 0.2 + aAbilitymissingHealthDamagePerTier[aAbilityTier]! * (1 - percentage) * dataSource.defender.health
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(x)
-        
-        return aAbilityCrystalDamage + weaponDamage + aAbilityBasicAttackDamage
-    }
-    
-    var aAbilityExecutableHealthPercentage: Double {
-        
-        let b = (1 - dataSource.attacker.armorPierce) / (1 + dataSource.defender.armor / 100) + dataSource.attacker.armorPierce
-        let c = aAbilitymissingHealthDamagePerTier[aAbilityTier]! * dataSource.defender.health
-        let wp = dataSource.attacker.weaponPower
-        let health = dataSource.defender.health
-        
-        return (wp * 0.2 * b + aAbilityCrystalDamage + aAbilityBasicAttackDamage + c * b) / (health + c * b)
-    }
-    
-    var aAbilityHeartthrobApplied: Int {
-        return aAbilityHeartthrobStacksAppliedPerTier[aAbilityTier]!
-    }
-    
-    var aAbilityRoseTrailSpeedBoost: Double {
-        return 1 + dataSource.attacker.crystalPower * 0.006
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -84,20 +51,17 @@ struct Blackfeather {
     
     //B ability
     
-    var bAbilityDamage: Double {
-        let crystalStrength = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 1.8
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        return crystalDamage + weaponDamage
+    var bAbilityRawCrystalDamage: Double {
+        let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 1.8
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilitySlow: Double {
-        return bAbilitySlowPerTier[bAbilityTier]!
+    var bAbilityRawWeaponDamage: Double {
+        return dataSource.attacker.buildPower.weaponPower * 1
     }
     
-    var bAbilitySlowDuration: Double {
-        return 1 + Double(dataSource.attacker.heroPower.heartthrobStack) * 0.3
+    var bAbilitySlowFactor: Double {
+        return bAbilitySlowPerTier[bAbilityTier]! * (1 + Double(dataSource.attacker.heroPower.heartthrobStack) * 0.4) / 2
     }
     
     var bAbilityBarrier: Double {
@@ -114,18 +78,13 @@ struct Blackfeather {
     
     //ult
     
-    var ultDamage: Double {
-        let basicAttackDamage = BasicAttackDamage(dataSource: dataSource).damage
-        let crystalStrength = dataSource.attacker.crystalPower * 0.5
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return crystalDamage + basicAttackDamage
+    var ultRawCrystalDamage: Double {
+        let x = dataSource.attacker.crystalPower * 0.5
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultChargeTime: Double {
         return ultChargeTimePerTier[ultTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
-    
-    var ultFortifiedHealth: Double {
-        return ultFortifiedHealthePerTier[ultTier]!
-    }
+
 }

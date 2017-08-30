@@ -36,9 +36,9 @@ struct Flicker {
     
     //A ability
     
-    var aAbilityDps: Double {
+    var aAbilityRawDps: Double {
         let x = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -47,22 +47,18 @@ struct Flicker {
     
     //B ability
 
-    var bAbilityDps: Double {
+    var bAbilityRawDps: Double {
         let x = bAbilityDpsPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDpsCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityDetonateDamage: Double {
+    var bAbilityDetonateRawDamage: Double {
         let x = bAbilityDetonateDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDpsCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityTotalDamage: Double {
-        return bAbilityDps * 3 + bAbilityDetonateDamage
-    }
-    
-    var bAbilitySlowStrength: Double {
-        return bAbilitySlowPerTier[bAbilityTier]!
+    var bAbilityTotalRawDamage: Double {
+        return bAbilityRawDps * 3 + bAbilityDetonateRawDamage
     }
     
     var bAbilityCooldown: Double {

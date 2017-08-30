@@ -20,7 +20,7 @@ class PlayerFightPower {
         return (heroPower.attackSpeed + buildPower.attackSpeed) * heroPower.hero!.attackSpeedModifier
     }
     var attackCooldown: Double {
-        return heroPower.hero!.attackCooldown / attackSpeed
+        return heroPower.hero!.attackCooldown
     }
     
     var critChance: Double {

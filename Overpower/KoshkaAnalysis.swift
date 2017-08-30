@@ -18,22 +18,18 @@ class KoshkaAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
+        result.append(("A ability raw damage".localizedString(), calculator.aAbilityRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.aAbilityCooldown)))
         
-        result.append(("B ability twirl damage".localizedString(), calculator.bAbilityTwirlDamage.string()))
+        result.append(("B ability twirl raw damage".localizedString(), calculator.bAbilityTwirlRawDamage.string()))
+        
+        result.append(("B ability buff raw damage".localizedString(), calculator.bAbilityEmpoweredRawDamage.string()))
         
         result.append(("Cooldown".localizedString(), roundedString(calculator.bAbilityCooldown)))
         
-        result.append(("A ➝ B ability twirl ➝ 2 empowered basic attacks combo damage".localizedString(), (calculator.bAbilityEmpoweredBasicAttackDamage * 2 + calculator.bAbilityTwirlDamage + calculator.aAbilityDamage).string()))
-        
-        result.append(("A ➝ 2 empowered basic attacks ➝ B ability twirl ➝ 2 empowered basic attacks combo damage".localizedString(), (calculator.bAbilityEmpoweredBasicAttackDamage * 4 + calculator.bAbilityTwirlDamage + calculator.aAbilityDamage).string()))
-        
-        result.append(("Ult damage".localizedString(), calculator.ultDamage.string()))
-        
-        result.append(("Stun duration".localizedString(), roundedString(2.2)))
-        
+        result.append(("Ult raw damage".localizedString(), calculator.ultRawDamage.string()))
+                
         return result
     }
 }

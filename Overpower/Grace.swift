@@ -32,25 +32,26 @@ struct Grace {
     let aAbilityBonusDamagePerTier: [Int : Double] = [1 : 20, 2 : 40, 3 : 60, 4 : 80, 5 : 120]
     let aAbilityBonusDamageWPRatio: Double = 0.4
     let aAbilityBonusDamageCPRatio: Double = 1
+    
     let bAbilityCDPerTier: [Int : Double] = [1 : 13, 2 : 12, 3 : 11, 4 : 10, 5 : 8]
     let bAbilityDamagePerTier: [Int : Double] = [1 : 125, 2 : 200, 3 : 275, 4 : 350, 5 : 425]
     let bAbilityDamageCPRatio: Double = 2
+    
     let ultCDPerTier: [Int : Double] = [1 : 60, 2 : 45, 3 : 30]
-    let ultHeaLPetTier: [Int : Double] = [1 : 400, 2 : 600, 3 : 800]
-    let ultHealCPRatio: Double = 1.5
+    let ultHeaLPetTier: [Int : Double] = [1 : 400, 2 : 500, 3 : 600]
+    let ultHealCPRatio: Double = 2
     let empoweredBasicAttackSlowStrength: Double = 0.75
     
-    var empoweredBasicAttackSlowDuration: Double {
+    var empoweredBasicAttackSlowFactor: Double {
         let crystalRatio = 0.003
+        var slowDuration = 0.0
         if dataSource.attacker.crystalPower < 200 {
-            return 0.6 + crystalRatio * dataSource.attacker.crystalPower
+            slowDuration = 0.6 + crystalRatio * dataSource.attacker.crystalPower
         } else {
-            return 0.6 + crystalRatio * 200
+            slowDuration = 0.6 + crystalRatio * 200
         }
-    }
-    
-    var empoweredBasicAttackSlowDistance: Double {
-        return dataSource.defender.moveSpeed * empoweredBasicAttackSlowStrength * empoweredBasicAttackSlowDuration
+        let slowFactor = slowDuration * empoweredBasicAttackSlowStrength
+        return slowFactor
     }
     
     var aAbilityShieldDurationOnAlly: Double {
@@ -61,21 +62,22 @@ struct Grace {
         }
     }
     
-    var aAbilityBonusDamage: Double {
-        let weaponStrength = aAbilityBonusDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityBonusDamageWPRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = dataSource.attacker.crystalPower * aAbilityBonusDamageCPRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var aAbilityRawCrystalBonusDamage: Double {
+        let x = dataSource.attacker.crystalPower * aAbilityBonusDamageCPRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var aAbilityRawWeaponBonusDamage: Double {
+        return aAbilityBonusDamagePerTier[aAbilityTier]! + dataSource.attacker.buildPower.weaponPower * aAbilityBonusDamageWPRatio
     }
     
     var aAbilityCooldown: Double {
         return aAbilityCDPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDamageCPRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {

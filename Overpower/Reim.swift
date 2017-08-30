@@ -45,26 +45,18 @@ struct Reim {
     
     //A ability
     
-    var aAbilityFirstHitDamage: Double {
+    var aAbilityFirstHitRawDamage: Double {
         let x = aAbilityFirstHitDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.0
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityShatterDamage: Double {
+    var aAbilityShatterRawDamage: Double {
         let x = aAbilitySecondHitDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.4
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityFullDamageOnChilledEnemy: Double {
-        return (aAbilityFirstHitDamage + aAbilityShatterDamage) * 1.25
-    }
-    
-    var aAbilityFortifiedHealthOnFirstHit: Double {
-        return aAbilityFirstHitDamage * 0.35
-    }
-    
-    var aAbilityMaxFortifiedHealth: Double {
-        return aAbilityFullDamageOnChilledEnemy * 0.35
+    var aAbilityRawFullDamageOnChilledEnemy: Double {
+        return (aAbilityFirstHitRawDamage + aAbilityShatterRawDamage) * 1.25
     }
     
     var aAbilityCooldown: Double {
@@ -73,13 +65,9 @@ struct Reim {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityRootDuration: Double {
-        return bAbilityRootDurationPerTier[bAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -88,29 +76,22 @@ struct Reim {
     
     //ult
     
-    var ultCenterDamage: Double {
+    var ultCenterRawDamage: Double {
         let x = ultCenterDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 1.25
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultEdgeDamage: Double {
+    var ultEdgeRawDamage: Double {
         let x = ultEdgeDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 1.0
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultCenterSlowDuration: Double {
-        return ultCenterSlowDurationPerTier[ultTier]!
+    var ultCenterSlowFactor: Double {
+        return ultCenterSlowDurationPerTier[ultTier]! * ultSlowPerTier[ultTier]!
     }
     
-    var ultEdgeSlowDuration: Double {
-        return ultEdgeSlowDurationPerTier[ultTier]!
+    var ultEdgeSlowFactor: Double {
+        return ultEdgeSlowDurationPerTier[ultTier]! * ultSlowPerTier[ultTier]!
     }
     
-    var ultSlowStrength: Double {
-        return ultSlowPerTier[ultTier]!
-    }
-    
-    var ultStunDuration: Double {
-        return ultStunDurationPerTier[ultTier]!
-    }
 }

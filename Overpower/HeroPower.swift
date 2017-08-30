@@ -33,10 +33,10 @@ class HeroPower {
         }
     }
     var weaponPower: Double {
-        return (hero!.weaponPowerHigh - hero!.weaponPowerLow) / 11 * Double(level! - 1) + hero!.weaponPowerLow + empoweredWeaponPower
+        return (hero!.weaponPowerHigh - hero!.weaponPowerLow) / 11 * Double(level! - 1) + hero!.weaponPowerLow
     }
     var attackSpeed: Double {
-        return (hero!.attackSpeedHigh - hero!.attackSpeedLow) / 11 * Double(level! - 1) + hero!.attackSpeedLow + empoweredAttackSpeed
+        return (hero!.attackSpeedHigh - hero!.attackSpeedLow) / 11 * Double(level! - 1) + hero!.attackSpeedLow
     }
     var critChance: Double = 0
     var critDamage: Double = 0.5
@@ -59,7 +59,5 @@ class HeroPower {
     var kiStack: Int = 0
     var livingArmorStack: Int = 0
     var captainOfTheGuardStack: Int = 0
-    var empoweredWeaponPower: Double = 0
-    var empoweredAttackSpeed: Double = 0
     
 }

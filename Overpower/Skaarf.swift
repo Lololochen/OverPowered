@@ -44,19 +44,15 @@ struct Skaarf {
     
     //A ability
     
-    var aAbilityDamage: Double {
+    var aAbilityRawDamage: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityMaxDPSWithBasicAttacks: Double {
-        let basicAttackDPS = DPSCalculator(dataSource: dataSource).dps
-        let abilityDPS = aAbilityDamage / aAbilityCooldown
+    var aAbilityWithBasicAttacksMaxRawCrystalDPS: Double {
+        let basicAttackDPS = BasicAttackDamage(dataSource: dataSource).rawCrystalDPS
+        let abilityDPS = aAbilityRawDamage / aAbilityCooldown
         return basicAttackDPS + abilityDPS
-    }
-    
-    var aAbilityFireBallTravelTime: Double {
-        return 12.5 / aAbilityFireBallSpeedPerTier[aAbilityTier]!
     }
     
     var aAbilityCooldown: Double {
@@ -65,18 +61,14 @@ struct Skaarf {
     
     //B ability
     
-    var bAbilityIgniteDamage: Double {
+    var bAbilityIgniteRawDamage: Double {
         let x = bAbilityIgniteDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityIgniteCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var bAbilityDps: Double {
+    var bAbilityBurnRawDPS: Double {
         let x = bAbilityDpsPerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityDpsCrystalRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityBurnDuration: Double {
-        return bAbilityBurnDurationPerTier[bAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -85,22 +77,13 @@ struct Skaarf {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDamage: Double {
         let x = ultDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        let rawDamage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
-        
-        var shieldPierce = dataSource.attacker.shieldPierce + ultShieldPiercePerTier[ultTier]!
-        if shieldPierce > 1 { shieldPierce = 1 }
-        let trueDamage = rawDamage / (1 + dataSource.defender.shield / 100) * (1 - shieldPierce) + rawDamage * shieldPierce
-        
-        return DamageCalculator(dataSource: dataSource).receivedDamage(trueDamage)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultDps: Double {
-        return ultDamage / 3
+    var ultRawDPS: Double {
+        return ultRawDamage / 3
     }
     
-    var ultFortifiedHealth: Double {
-        return ultFortifiedHealthPerTier[ultTier]!
-    }
 }

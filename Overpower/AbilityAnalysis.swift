@@ -27,7 +27,7 @@ class AbilityAnalysis {
     }
     
     func genericInfo() -> [(String, String)] {
-        return enemyInfo() + basicAttackDPS() + itemStats()
+        return enemyInfo() + basicAttackRawWeaponDamage() + basicAttackRawCrystalDamage() + itemStats()
     }
     
     func enemyInfo() -> [(String, String)] {
@@ -40,18 +40,38 @@ class AbilityAnalysis {
                 ("Enemy armor".localizedString(), enemyArmor.string())]
     }
     
-    func basicAttackDPS() -> [(String, String)] {
-        let dps = DPSCalculator(dataSource: dataSource).dps
-        return [("Basic attack DPS".localizedString(), dps.string())]
+    func basicAttackRawWeaponDamage() -> [(String, String)] {
+        let damage = BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit
+        let dps = BasicAttackDamage(dataSource: dataSource).rawWeaponDPS
+        return [("Raw Weapon damage per basic attack".localizedString(), damage.string()), ("Basic attack raw weapon DPS".localizedString(), dps.string())]
+    }
+    
+    func basicAttackRawCrystalDamage() -> [(String, String)] {
+        let damage = BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit
+        let dps = BasicAttackDamage(dataSource: dataSource).rawCrystalDPS
+        
+        if damage > 0 {
+            return [("Raw crystal damage per basic attack".localizedString(), damage.string()), ("Raw crystal DPS".localizedString(), dps.string())]
+        } else {
+            return []
+        }
     }
     
     func itemStats() -> [(String, String)] {
         var x = [(String, String)]()
         if dataSource.attacker.buildPower.build.contains(Item.aftershock) {
-            let aftershockDamage = MaxHealthDamageCalculator(dataSource: dataSource, maxHealthRatio: 0.15).afterShockDamage()
-            x.append(("Aftershock damage".localizedString(), aftershockDamage.string()))
+            let aftershockDamage = afterShockRawDamage()
+            let lifesteal = aftershockDamage * 0.5
+            x.append(("Aftershock raw damage".localizedString(), aftershockDamage.string()))
+            x.append(("Aftershock lifesteal against heroes".localizedString(), lifesteal.string()))
         }
         return x
+    }
+    
+    func afterShockRawDamage() -> Double {
+        let x = dataSource.defender.health * 0.15
+        let y = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        return y
     }
 
 }

@@ -40,17 +40,14 @@ struct Celeste {
     
     //A ability
     
-    var aAbilitySmallStarDamage: Double {
+    var aAbilityInitialRawDamage: Double {
         let x = aAbilityShootDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 0.9
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    var aAbilityNovaDamage: Double {
-        let x = aAbilitySuperNovaDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 2.2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilityRange: Double {
-        return aAbilityRangePerTier[aAbilityTier]!
+    var aAbilityExplosionRawDamage: Double {
+        let x = aAbilitySuperNovaDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 2.2
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -59,13 +56,9 @@ struct Celeste {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]!
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityStunDuration: Double {
-        return bAbilityStunDurationPerTier[bAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -74,13 +67,13 @@ struct Celeste {
     
     //ult
     
-    var ultLeadStarDamage: Double {
+    var ultLeadStarRawDamage: Double {
         let x = ultLeadStarDamagePerTier[ultTier]! + dataSource.attacker.crystalPower
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var ultSmallerStarDamage: Double {
+    var ultSmallerStarRawDamage: Double {
         let x = ultStarDamagePerTier[ultTier]! + dataSource.attacker.crystalPower * 0.2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
 }

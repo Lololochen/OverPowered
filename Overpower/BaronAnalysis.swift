@@ -17,35 +17,29 @@ class BaronAnalysis: AbilityAnalysis {
     func analyze() -> [(String, String)] {
         
         result.append(contentsOf: genericInfo())
-
-        result.append(("A ability damage".localizedString(), calculator.aAbilityDamage.string()))
         
-        result.append(("Max DPS".localizedString(), calculator.aAbilityMaxDPS.string()))
+        result.append(("A ability max raw crystal DPS".localizedString(), calculator.aAbilityMaxRawCrystalDPS.string()))
         
-        result.append(("Slow strength".localizedString(), percentageString(calculator.aAbilitySlow)))
+        result.append(("A ability max raw weapon DPS".localizedString(), calculator.aAbilityMaxRawWeaponDPS.string()))
+        
+        result.append(("Slow factor".localizedString(), percentageString(calculator.aAbilitySlowFactor)))
         
         result.append(("Range".localizedString(), roundedString(calculator.aAbilityRange)))
         
         result.append(("Charge time".localizedString(), roundedString(calculator.aAbilityChargeTime)))
         
         result.append(("B ability range".localizedString(), calculator.bAbilityRange.string()))
-        
-        result.append(("2 shots after jump damage".localizedString(), calculator.bAbilityTwoShotDamage.string()))
-        
+       
         result.append(("Speed boost".localizedString(), calculator.bAbilitySpeedBoost.string()))
         
-        result.append(("B ability cooldown".localizedString(), calculator.bAbilityCooldown.string()))
+        result.append(("Cooldown".localizedString(), calculator.bAbilityCooldown.string()))
         
         result.append(("Miminum cooldown in fight (basic attacking enemy non-stop)".localizedString(), roundedString(calculator.bAbilityCooldownInFight)))
         
-        result.append(("Ult center damage".localizedString(), calculator.ultDamageInCenter.string()))
+        result.append(("Ult center raw crystal damage".localizedString(), calculator.ultRawCrystalDamage.string()))
         
-        result.append(("Damage on the edge".localizedString(), calculator.ultDamageOnTheEdge.string()))
+        result.append(("Ult center raw weapon damage".localizedString(), calculator.ultRawWeaponDamage.string()))
         
-        result.append(("Ult range".localizedString(), calculator.ultRange.string()))
-        
-        result.append(("Basic attack range".localizedString(), roundedString(calculator.ultBasicAttackRange)))
-
         return result
     }
 }

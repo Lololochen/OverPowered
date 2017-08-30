@@ -27,10 +27,10 @@ struct Skye {
     
     let aAbilityCooldownPerTier: [Int : Double] = [1 : 6, 2 : 6, 3 : 6, 4 : 6, 5 : 5]
     let aAbilityDpsPerTier: [Int: Double] = [1 : 120, 2 : 160, 3 : 200, 4 : 240, 5 : 320]
-    let aAbilityDpsCrystalRatio = 2.1
+    let aAbilityDpsCrystalRatio = 1.2
     let aAbilityDpsWeaponRatio = 0.7
     let aAbilityLockOnBonus = 0.1
-    let aAbilityLockOnBonusCrystalRatio = 0.1
+    let aAbilityLockOnBonusCrystalRatio = 0.33
     let aAbilitySlowWeaponRatio = 0.2
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 14, 2 : 12, 3 : 10, 4 : 8, 5 : 6]
@@ -47,18 +47,23 @@ struct Skye {
     
     //A ability
     
-    var aAbilityDps: Double {
-        let weaponStrength = dataSource.attacker.buildPower.weaponPower * aAbilityDpsWeaponRatio
-        let weaponDamage = DamageCalculator(dataSource: dataSource).receivedWeaponDamage(weaponStrength)
-        let crystalStrength = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityDpsCrystalRatio
-        let crystalDamage = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(crystalStrength)
-        return weaponDamage + crystalDamage
+    var aAbilityRawWeaponDPS: Double {
+        return dataSource.attacker.buildPower.weaponPower * aAbilityDpsWeaponRatio
     }
     
-    var aAbilityLockOnDPS: Double {
-        let x = dataSource.attacker.crystalPower * aAbilityLockOnBonusCrystalRatio
-        let lockOnCPdps = DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-        return lockOnCPdps + aAbilityDps * 1.1
+    var aAbilityRawCrystalDPS: Double {
+        let x = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityDpsCrystalRatio
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var aAbilityLockOnRawCrystalDPS: Double {
+        let bonusRatio = dataSource.attacker.crystalPower * aAbilityLockOnBonusCrystalRatio
+        let newDamage = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * (aAbilityDpsCrystalRatio + bonusRatio)
+        return newDamage * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+    }
+    
+    var aAbilityLockOnFullRawCrystalDamage: Double {
+        return aAbilityLockOnRawCrystalDPS * 3
     }
     
     var aAbilitySlowStrength: Double {
@@ -72,17 +77,9 @@ struct Skye {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var bAbilityCooldownReset: Double {
-        return bAbilityCooldownResetPerTier[bAbilityTier]!
-    }
-    
-    var bAbilityTargetLockDurationBonus: Double {
-        return bAbilityTargetLockDurationBonusPerTier[bAbilityTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
@@ -91,17 +88,9 @@ struct Skye {
     
     //ult
     
-    var ultDamage: Double {
+    var ultRawDPS: Double {
         let x = ultDpsPerTier[ultTier]! + dataSource.attacker.crystalPower * ultCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var ultSlowStrength: Double {
-        return ultSlowPerTier[ultTier]!
-    }
-    
-    var ultTargetLockRangeBonus: Double {
-        return ultTargetLockRangeBonusPerTier[ultTier]!
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultCooldown: Double {

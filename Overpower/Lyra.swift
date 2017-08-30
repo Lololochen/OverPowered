@@ -38,9 +38,9 @@ struct Lyra {
     
     //A ability
     
-    var aAbilityDps: Double {
+    var aAbilityRawDps: Double {
         let x = aAbilityDamagePerSecPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 0.8
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityHealPerSec: Double {
@@ -51,9 +51,9 @@ struct Lyra {
         return aAbilityHealPerSec * 2.5
     }
     
-    var aAbilityDetonateDamage: Double {
+    var aAbilityDetonateRawDamage: Double {
         let x = aAbilityDetonateDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * 1.2
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityCooldown: Double {
@@ -62,18 +62,13 @@ struct Lyra {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * bAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityCooldown: Double {
         return bAbilityCooldownPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction)
     }
     
-    //ult
-    
-    var ultRange: Double {
-        return ultRangePerTier[ultTier]!
-    }
 }

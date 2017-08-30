@@ -39,29 +39,22 @@ struct Kestrel {
     
     //A ability
     
-    var aAbilityBasicAttackDamage: Double {
-        let basicAttackDamageCalculator = BasicAttackDamage(dataSource: dataSource)
-        return basicAttackDamageCalculator.damage
-    }
-    var aAbilityWeaponDamage: Double {
-        let basicAttackWeaponDamage = BasicAttackDamage(dataSource: dataSource).weaponDamagePerHit
+    var fourShotsRawWeaponDamage: Double {
+        let basicAttackWeaponDamage = BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit * 4
         return basicAttackWeaponDamage * aAbilityBasicAttackMultiplifier[aAbilityTier]!
     }
     
-    var aAbilityDamageWithTensionBow: Double {
-        dataSource.attacker.buildPower.tensionBowBuffed = true
-        let baseDamage = BasicAttackDamage(dataSource: dataSource).weaponDamagePerHit
-        dataSource.attacker.buildPower.tensionBowBuffed = false
-        return baseDamage * aAbilityBasicAttackMultiplifier[aAbilityTier]!
+    var fourShotsRawCrystalDamage: Double {
+        let x = aAbilityDamageLet[aAbilityTier]! + dataSource.attacker.crystalPower * 1.6 * 4
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
-    var aAbilitySplashDamage: Double {
-        let x = aAbilityDamageLet[aAbilityTier]! + dataSource.attacker.crystalPower * 1.6
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+    var glimmerShotWithBasicAttacksRawWeaponDPS: Double {
+        return (fourShotsRawWeaponDamage + BasicAttackDamage(dataSource: dataSource).rawWeaponDamagePerHit * 4) / 3.6
     }
     
-    var aAbilityDamage: Double {
-        return aAbilityWeaponDamage + aAbilitySplashDamage
+    var glimmerShotWithBasicAttacksRawCrystalDPS: Double {
+        return (fourShotsRawCrystalDamage + BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit * 4) / 3.6
     }
     
     var aAbilityReloadTime: Double {
@@ -70,9 +63,9 @@ struct Kestrel {
     
     //B ability
     
-    var bAbilityDamage: Double {
+    var bAbilityRawDamage: Double {
         let x = bAbilityDamagePerTier[bAbilityTier]! + dataSource.attacker.crystalPower * 2.7
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var bAbilityStealthDuration: Double {
@@ -93,21 +86,13 @@ struct Kestrel {
     
     //ult
     
-    var ultWeaponDamage: Double {
-        let weaponPower = ultDamagePerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * 1.2
-        var armorPierce = dataSource.attacker.armorPierce + ultArmorPiercePerTier[ultTier]!
-        if armorPierce > 1 { armorPierce = 1 }
-        let trueDamage = weaponPower / (1 + dataSource.defender.armor / 100) * (1 - armorPierce) + weaponPower * armorPierce
-        return DamageCalculator(dataSource: dataSource).receivedDamage(trueDamage)
+    var ultRawWeaponDamage: Double {
+        return ultDamagePerTier[ultTier]! + dataSource.attacker.buildPower.weaponPower * 1.2
     }
     
-    var ultCrystalDamage: Double {
+    var ultRawCrystalDamage: Double {
         let x = dataSource.attacker.buildPower.crystalPower * 2.6
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-    }
-    
-    var ultDamage: Double {
-        return ultWeaponDamage + ultCrystalDamage
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var ultCooldown: Double {

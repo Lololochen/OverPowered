@@ -18,64 +18,27 @@ class KestrelAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
 
-        let glimmerShotDamage = calculator.aAbilityDamage
-        result.append(("Glimmer Shot damage".localizedString(), glimmerShotDamage.string()))
+        result.append(("A ability 4 shots raw weapon damage".localizedString(), calculator.fourShotsRawWeaponDamage.string()))
         
-        if dataSource.attacker.buildPower.build.contains(Item.tensionBow) {
-            let damageWithTensionBow = calculator.aAbilityDamageWithTensionBow
-            result.append(("Damage with Tension Bow".localizedString(), damageWithTensionBow.string()))
-        }
+        result.append(("A ability 4 shots raw crystal damage".localizedString(), calculator.fourShotsRawCrystalDamage.string()))
         
-        var fourShotsDamage: Double {
-            if dataSource.attacker.buildPower.build.contains(Item.tensionBow) {
-                return calculator.aAbilityDamageWithTensionBow + glimmerShotDamage * 3
-            } else {
-                return glimmerShotDamage * 4
-            }
-        }
-        result.append(("4 Glimmer Shots".localizedString(), fourShotsDamage.string()))
+        result.append(("A ability with basic attacks raw weapon DPS".localizedString(), calculator.glimmerShotWithBasicAttacksRawWeaponDPS.string()))
         
-        let a = fourShotsDamage + calculator.aAbilityBasicAttackDamage
-        result.append(("4 Glimmer Shots with 4 basic attacks damage".localizedString(), a.string()))
+        result.append(("A ability with basic attacks raw crystal DPS".localizedString(), calculator.glimmerShotWithBasicAttacksRawCrystalDPS.string()))
         
-        let longRangeDamage = calculator.aAbilitySplashDamage
-        result.append(("Splash damage".localizedString(), longRangeDamage.string()))
+        result.append(("Reload time".localizedString(), roundedString(calculator.aAbilityReloadTime)))
         
-        let dps = fourShotsDamage / 2.4
-        result.append(("Glimmer Shot DPS".localizedString(), dps.string()))
+        result.append(("B ability raw damage".localizedString(), calculator.bAbilityRawDamage.string()))
         
-        let mixedDPS = (fourShotsDamage + calculator.aAbilityBasicAttackDamage * 4) / 3.6
-        result.append(("Glimmer Shot with basic attack DPS".localizedString(), mixedDPS.string()))
+        result.append(("B ability stealth duration".localizedString(), roundedString(calculator.bAbilityStealthDuration)))
         
-        let reloadTime = calculator.aAbilityReloadTime
-        result.append(("Reload time".localizedString(), roundedString(reloadTime)))
+        result.append(("Mist duration".localizedString(), roundedString((calculator.bAbilityMistDuration))))
         
-        let stealthDuration = calculator.bAbilityStealthDuration
-        result.append(("B ability stealth duration".localizedString(), roundedString(stealthDuration)))
+        result.append(("Speed boost".localizedString(), roundedString(calculator.bAbilityMoveSpeedIncrease)))
         
-        let mistDamageWithBasicAttack = calculator.bAbilityDamage + calculator.aAbilityBasicAttackDamage
-        result.append(("Mist damage with basic attack".localizedString(), mistDamageWithBasicAttack.string()))
+        result.append(("Ult raw weapon damage".localizedString(), calculator.ultRawWeaponDamage.string()))
         
-        let mistDamageWithGlimmerShot = calculator.bAbilityDamage + glimmerShotDamage
-        result.append(("Mist damage with glimmer shot".localizedString(), mistDamageWithGlimmerShot.string()))
-        
-        let mistDuration = calculator.bAbilityMistDuration
-        result.append(("Mist duration".localizedString(), roundedString(mistDuration)))
-        
-        let moveSpeedIncrease = calculator.bAbilityMoveSpeedIncrease
-        result.append(("Move speed increase".localizedString(), roundedString(moveSpeedIncrease)))
-        
-        let bAbilityCooldown = calculator.bAbilityCooldown
-        result.append(("B ability cooldown".localizedString(), roundedString(bAbilityCooldown)))
-        
-        let ultDamage = calculator.ultDamage
-        result.append(("Ult damage".localizedString(), ultDamage.string()))
-        
-        let ultOnMist = ultDamage + calculator.bAbilityDamage
-        result.append(("Ult on mist damage".localizedString(), ultOnMist.string()))
-        
-        let ultCooldown = calculator.ultCooldown
-        result.append(("Ult cooldown".localizedString(), ultCooldown.string()))
+        result.append(("Ult raw crystal damage".localizedString(), calculator.ultRawCrystalDamage.string()))
         
         return result
     }
