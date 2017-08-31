@@ -16,8 +16,9 @@ class PageVC: UIPageViewController, UIPageViewControllerDataSource {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let conversationVC = storyboard.instantiateViewController(withIdentifier: "ConversationVC")
         let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultVC")
+        let helpVC = storyboard.instantiateViewController(withIdentifier: "HelpVC")
         
-        return [conversationVC, resultVC]
+        return [conversationVC, resultVC, helpVC]
     }()
 
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class PageVC: UIPageViewController, UIPageViewControllerDataSource {
         let currentIndex = viewControllersToAdd.index(of: viewController)
         
         let previousIndex = currentIndex! - 1
-        if previousIndex == 0 {
+        if previousIndex >= 0 {
             return viewControllersToAdd[previousIndex]
         } else {
             return nil
@@ -46,7 +47,7 @@ class PageVC: UIPageViewController, UIPageViewControllerDataSource {
         }
         
         let nextIndex = viewControllerIndex + 1
-        if nextIndex == 1 {
+        if nextIndex <= 2 {
             return viewControllersToAdd[nextIndex]
         } else {
             return nil

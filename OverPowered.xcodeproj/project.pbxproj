@@ -77,6 +77,7 @@
 		56ECBF421E7A51CE00AA8CAF /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ECBF411E7A51CE00AA8CAF /* ConversationCell.swift */; };
 		56EE72A01F00EE7000B24550 /* Grace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EE729F1F00EE7000B24550 /* Grace.swift */; };
 		56EE72A21F00EEAC00B24550 /* GraceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EE72A11F00EEAC00B24550 /* GraceAnalysis.swift */; };
+		56F0C78B1F57ED7D00A218F9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0C78A1F57ED7D00A218F9 /* HelpViewController.swift */; };
 		56F865DC1E7901410040A9DA /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F865DB1E7901410040A9DA /* DialogView.swift */; };
 		56FB924F1E121A4A00D2790F /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB924E1E121A4A00D2790F /* Hero.swift */; };
 		56FB92511E125C4900D2790F /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB92501E125C4900D2790F /* ViewExtensions.swift */; };
@@ -235,6 +236,7 @@
 		56ECBF411E7A51CE00AA8CAF /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		56EE729F1F00EE7000B24550 /* Grace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grace.swift; sourceTree = "<group>"; };
 		56EE72A11F00EEAC00B24550 /* GraceAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceAnalysis.swift; sourceTree = "<group>"; };
+		56F0C78A1F57ED7D00A218F9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		56F865DB1E7901410040A9DA /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		56FB924E1E121A4A00D2790F /* Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		56FB92501E125C4900D2790F /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				56E11EF41DB0C0EF00EEFA21 /* PopoverCollectionVC.swift */,
 				56E11EF61DB0D00800EEFA21 /* PopoverCell.swift */,
 				56C738C51F23089A00997DAD /* ResultVC.swift */,
+				56F0C78A1F57ED7D00A218F9 /* HelpViewController.swift */,
 				5614745F1E90F33200DEF937 /* LocalItem.swift */,
 				561474611E91071400DEF937 /* LocalHero.swift */,
 				5636FC911E694BC300A92F7B /* Selectable.swift */,
@@ -682,6 +685,7 @@
 				56FB92511E125C4900D2790F /* ViewExtensions.swift in Sources */,
 				560F1E1E1E7D190400977C2E /* TextFieldWithAMission.swift in Sources */,
 				BED8BDB21F4324BA009B4AD1 /* Skye.swift in Sources */,
+				56F0C78B1F57ED7D00A218F9 /* HelpViewController.swift in Sources */,
 				561DBDB41E923A6E006F5ED2 /* AbilityAnalysis.swift in Sources */,
 				BE83D0D71F3C186100C03878 /* Blackfeather.swift in Sources */,
 				BEF758111F3D51700061BA42 /* Catherine.swift in Sources */,
