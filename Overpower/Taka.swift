@@ -28,7 +28,7 @@ struct Taka {
     let aAbilityDamagePerTier: [Int : Double] = [1 : 100, 2 : 165, 3 : 230, 4 : 295, 5 : 360]
     let aAbilityCooldownPerTier: [Int : Double] = [1 : 15, 2 : 15, 3 : 15, 4 : 15, 5 : 15]
     
-    let bAbilityHealPerSec: [Int : Double] = [1 : 100, 2 : 165, 3 : 230, 4 : 295, 5 : 360]
+    let bAbilityHealPerSec: [Int : Double] = [1 : 25, 2 : 40, 3 : 55, 4 : 70, 5 : 100]
     let bAbilityStealthDurationPerTier: [Int : Double] = [1 : 3, 2 : 3.2, 3 : 3.4, 4 : 3.6, 5 : 4]
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 25, 2 : 24, 3 : 23, 4 : 22, 5 : 21]
     

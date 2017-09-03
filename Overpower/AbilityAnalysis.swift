@@ -34,10 +34,26 @@ class AbilityAnalysis {
         let enemyHP = dataSource.defender.health
         let enemyShield = dataSource.defender.shield
         let enemyArmor = dataSource.defender.armor
+        let weaponMitigationFactor = calcWeaponMitigationFactor()
+        let crystalMitigationFactor = calcCrystalMitigationFactor()
         
         return [("Enemy HP".localizedString(), enemyHP.string()),
                 ("Enemy shield".localizedString(), enemyShield.string()),
-                ("Enemy armor".localizedString(), enemyArmor.string())]
+                ("Enemy armor".localizedString(), enemyArmor.string()),
+                ("Enemy defense weapon damage mitigation factor".localizedString(), roundedString(weaponMitigationFactor)),
+                ("Enemy defense crystal damage mitigation factor".localizedString(), roundedString(crystalMitigationFactor))]
+    }
+    
+    func calcWeaponMitigationFactor() -> Double {
+        let pierceRatio = dataSource.attacker.armorPierce
+        let armor = dataSource.defender.armor
+        return (pierceRatio + (1 - pierceRatio)) / (1 + armor/100)
+    }
+    
+    func calcCrystalMitigationFactor() -> Double {
+        let pierceRatio = dataSource.attacker.shieldPierce
+        let shield = dataSource.defender.shield
+        return (pierceRatio + (1 - pierceRatio)) / (1 + shield/100)
     }
     
     func basicAttackRawWeaponDamage() -> [(String, String)] {

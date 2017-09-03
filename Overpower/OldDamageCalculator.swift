@@ -39,22 +39,4 @@ struct DamageCalculator {
 
 }
 
-//struct MaxHealthDamageCalculator {
-//
-//    var dataSource: DataSource
-//    var maxHealthRatio: Double
-//
-//    var weaponDamage: Double {
-//        return maxHealthRatio * dataSource.defender.health
-//    }
-//
-//    var crystalDamage: Double {
-//        let x = maxHealthRatio * dataSource.defender.health
-//        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
-//    }
-//
-//
-//
-//}
-
 

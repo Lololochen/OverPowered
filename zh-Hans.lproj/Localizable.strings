@@ -272,8 +272,11 @@
 "Raw damage: the amount of damage you'll deal if the target has 0 defense, crit damage is averaged." = "原始伤害：在对方防御为0的情况下，你的攻击会产生的伤害。暴击伤害会计算平均值。";
 "Slow factor: slow factor = slow strength * slow duration, if you are slowed by a factor of 1, and your move speed is 4, your enemy can catch up 4m with you after the slow." = "减速系数：减速系数 = 减速强度 * 减速时间，如果你受到减速系数为1的减速，你的基础移动速度为4，那么减速结束后你的敌人可以赶上4米。";
 "Executable health: for abilities dealing damage based on target's missing health, this is the amount of target health below which you can absolutely kill the target." = "必杀生命值：如果技能的伤害是基于敌方最大生命值的，如果目标的生命值低于此百分比，此技能一定可以击杀目标。";
-
-
+"Basic attack raw weapon DPS" = "普通攻击原始物理伤害";
+"A ability raw crystal damage" = "A技能原始法术伤害";
+"Enemy defense weapon damage mitigation factor" = "敌方防御对物理伤害的减弱系数";
+"Enemy defense crystal damage mitigation factor" = "敌方防御对法术伤害的减弱系数";
+"Damage mitigation factor: multiply this number with raw damage, the result is the amount of damage the enemy will receive. " = "伤害减弱系数：把原始伤害跟这个数字相乘，得到的结果就是敌人受到的伤害。";
 
 
 
