@@ -26,7 +26,7 @@ struct Kestrel {
     }
     
     let aAbilityBasicAttackMultiplifier: [Int : Double] = [1 : 1, 2 : 1.05, 3 : 1.1, 4 : 1.15, 5 : 1.3]
-    let aAbilityDamageLet: [Int : Double] = [1 : 30, 2 : 60, 3 : 90, 4 : 120, 5 : 150]
+    let aAbilityDamage: [Int : Double] = [1 : 30, 2 : 60, 3 : 90, 4 : 120, 5 : 150]
     
     let bAbilityDamagePerTier: [Int : Double] = [1 : 100, 2 : 150, 3 : 200, 4 : 250, 5 : 300]
     let bAbilityMistDurationPerTier: [Int : Double] = [1 : 4, 2 : 5, 3 : 6, 4 : 7, 5 : 8]
@@ -45,7 +45,7 @@ struct Kestrel {
     }
     
     var fourShotsRawCrystalDamage: Double {
-        let x = aAbilityDamageLet[aAbilityTier]! + dataSource.attacker.crystalPower * 1.6 * 4
+        let x = aAbilityDamage[aAbilityTier]! + dataSource.attacker.crystalPower * 1.6 * 4
         return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     

@@ -35,7 +35,7 @@ class Infusion: Item {
             let cooldownReduction = 0.15 / 11 * Double(level - 1) + 0.1
             let armor = 20 / 11 * Double(level - 1) + 10
             let shield = 20 / 11 * Double(level - 1) + 10
-            super.init(name: "Weapon Infusion", price: 500, crystalPower: crystalPower, cooldownReduction: cooldownReduction, armor: armor, shield: shield)
+            super.init(name: "Crystal Infusion", price: 500, crystalPower: crystalPower, cooldownReduction: cooldownReduction, armor: armor, shield: shield)
         }
     }
 }

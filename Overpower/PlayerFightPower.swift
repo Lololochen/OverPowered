@@ -58,6 +58,7 @@ class PlayerFightPower {
         }
         return (heroPower.armor + buildPower.armor) * (1 - armorShred)
     }
+    
     var shield: Double {
         if heroPower.hero == Hero.phinn {
             return (heroPower.shield + buildPower.shield) * 1.15
@@ -67,13 +68,16 @@ class PlayerFightPower {
         }
         return heroPower.shield + buildPower.shield
     }
+    
     var health: Double {
         if heroPower.hero == Hero.phinn {
             return (heroPower.health + buildPower.health) * 1.15
         }
         return heroPower.health + buildPower.health
     }
+    
     var healthPercentage: Double = 1
+    
     var moveSpeed: Double {
         return heroPower.hero!.moveSpeed + buildPower.moveSpeed
     }

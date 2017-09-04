@@ -48,15 +48,13 @@ class BuildPower {
     var tensionBowBuffed: Bool = false
     
     var crystalPower: Double {
-        let clockworkMultiplier: Double = hasClockwork ? 1.3 : 1
+        let clockworkMultiplier: Double = build.contains(Item.clockwork) ? 1.3 : 1
+        let originalCrystalPower = build.reduce(0, { $0 + $1.crystalPower })
         
         if infusion != nil {
-            return (build.reduce(0, { $0 + $1.crystalPower }) + infusion!.crystalPower) * clockworkMultiplier
+            return (originalCrystalPower + infusion!.crystalPower) * clockworkMultiplier
         }
-        return build.reduce(0, { $0 + $1.crystalPower }) * clockworkMultiplier
-    }
-    var hasClockwork: Bool {
-        return build.contains(Item.clockwork) ? true : false
+        return originalCrystalPower * clockworkMultiplier
     }
     var brokenMythStack: Int = 0
     var cooldownReduction: Double {

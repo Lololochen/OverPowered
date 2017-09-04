@@ -108,11 +108,6 @@ class Router {
     
     func attackerBuildVariation(of item: Item) {
         
-        if item == Item.tensionBow {
-            returnData.append(IncomingData(question: "Of every 6 seconds how many seconds are you attacking the enemy?".localizedString(), answerType: .textField(regex: "[0-6]"), answerIdentifier: "FIGHT DURATION"))
-            questionsAnswered["FIGHT DURATION"] = false
-        }
-        
         if item == Item.breakingPoint {
             returnData.append(IncomingData(question: "What's the stack of Breaking Point?".localizedString(), answerType: .textField(regex: "([0-9]|1[0-9]|20)"), answerIdentifier: "BREAKING POINT STACK"))
             questionsAnswered["BREAKING POINT STACK"] = false
@@ -149,13 +144,13 @@ class Router {
     
     func askAbilityInfo() {
         
-        returnData.append( IncomingData(question: "What's A ability's tier?".localizedString(), answerType: .textField(regex: "[1-5]"), answerIdentifier: "A ABILITY TIER"))
+        returnData.append( IncomingData(question: "What's the tier of your hero's A ability?".localizedString(), answerType: .textField(regex: "[1-5]"), answerIdentifier: "A ABILITY TIER"))
         questionsAnswered["A ABILITY TIER"] = false
         
-        returnData.append( IncomingData(question: "What's B ability's tier?".localizedString(), answerType: .textField(regex: "[1-5]"), answerIdentifier: "B ABILITY TIER"))
+        returnData.append( IncomingData(question: "What's the tier of your hero's B ability?".localizedString(), answerType: .textField(regex: "[1-5]"), answerIdentifier: "B ABILITY TIER"))
         questionsAnswered["B ABILITY TIER"] = false
         
-        returnData.append( IncomingData(question: "What's Ult's tier?".localizedString(), answerType: .textField(regex: "[1-3]"), answerIdentifier: "ULT TIER"))
+        returnData.append( IncomingData(question: "What's the tier of your hero's Ult?".localizedString(), answerType: .textField(regex: "[1-3]"), answerIdentifier: "ULT TIER"))
         questionsAnswered["ULT TIER"] = false
     }
     

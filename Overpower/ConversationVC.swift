@@ -30,6 +30,20 @@ class ConversationVC: UICollectionViewController {
         viewModel = ConversationViewModel(router: Router.shared, conversationVC: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "Launched before") == false {
+            showPrompt()
+            UserDefaults.standard.set(false, forKey: "Launched before")
+        }
+    }
+    
+    func showPrompt() {
+        let alertController = UIAlertController(title: "Hint", message: "Swipte to right to see the results after you finish input", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Got it!", style: .default, handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.conversationContent.count
     }

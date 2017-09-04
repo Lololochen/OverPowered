@@ -34,7 +34,6 @@
 		564722001DF6BC2F00665395 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562F22491D80345C007D9C9F /* Main.storyboard */; };
 		564F826E1E7BD4CE006F7D48 /* BasicAttackDamage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F826D1E7BD4CE006F7D48 /* BasicAttackDamage.swift */; };
 		566090BA1E83C9BA00804610 /* Vox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566090B91E83C9BA00804610 /* Vox.swift */; };
-		566090C61E83F4B900804610 /* OldDamageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566090C51E83F4B900804610 /* OldDamageCalculator.swift */; };
 		56706B9D1DDC354900863B59 /* Digital.otf in Resources */ = {isa = PBXBuildFile; fileRef = 56706B9C1DDC354900863B59 /* Digital.otf */; };
 		5672FF531EB4406D00D41F97 /* Baptiste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672FF521EB4406D00D41F97 /* Baptiste.swift */; };
 		5672FF551EB443F200D41F97 /* BaptisteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672FF541EB443F200D41F97 /* BaptisteAnalysis.swift */; };
@@ -172,7 +171,6 @@
 		561DBDB51E924F9C006F5ED2 /* ConversationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		562F22421D80345C007D9C9F /* OverPowered.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverPowered.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562F22451D80345C007D9C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		562F22471D80345C007D9C9F /* BestBuildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestBuildVC.swift; sourceTree = "<group>"; };
 		562F224A1D80345C007D9C9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		562F224F1D80345C007D9C9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		562F22511D80345C007D9C9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 		566090B71E83BE8800804610 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		566090B81E83BE9B00804610 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		566090B91E83C9BA00804610 /* Vox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vox.swift; sourceTree = "<group>"; };
-		566090C51E83F4B900804610 /* OldDamageCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldDamageCalculator.swift; sourceTree = "<group>"; };
 		56706B8A1DDB350200863B59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		56706B9C1DDC354900863B59 /* Digital.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Digital.otf; sourceTree = "<group>"; };
 		5672FF521EB4406D00D41F97 /* Baptiste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Baptiste.swift; sourceTree = "<group>"; };
@@ -434,7 +431,6 @@
 		565A63A31DF56C1F00D9835A /* Unused code */ = {
 			isa = PBXGroup;
 			children = (
-				562F22471D80345C007D9C9F /* BestBuildVC.swift */,
 				565E2AD21D9BEEEF0006FB91 /* Iterator.swift */,
 				561AF4361D810C59003B58D9 /* WPCalculator.swift */,
 				56A217141DAB8B00006F0510 /* CPCalculator.swift */,
@@ -471,7 +467,6 @@
 				561DBDB31E923A6E006F5ED2 /* AbilityAnalysis.swift */,
 				563E60061E69A0FC00844C6A /* AbilityCalculators */,
 				5657C2AF1D8A865500780F54 /* Data Models */,
-				566090C51E83F4B900804610 /* OldDamageCalculator.swift */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -727,7 +722,6 @@
 				5639BC801E80C60400C0E91E /* ConversationVC.swift in Sources */,
 				56F865DC1E7901410040A9DA /* DialogView.swift in Sources */,
 				567719721E9764BF0014F392 /* LanceAnalysis.swift in Sources */,
-				566090C61E83F4B900804610 /* OldDamageCalculator.swift in Sources */,
 				567719841E9766A80014F392 /* SamuelAnalysis.swift in Sources */,
 				5677195C1E9762500014F392 /* CatherineAnalysis.swift in Sources */,
 				568822211E76C8FA00BB956C /* CommunicationModel.swift in Sources */,

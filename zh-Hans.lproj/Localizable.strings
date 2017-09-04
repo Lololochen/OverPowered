@@ -83,9 +83,9 @@
 "What's the enemy hero's level?" = "敌方英雄的等级是多少？";
 "What's your hero's level?" = "你的英雄的等级是多少？";
 "What's the enemy hero?" = "敌方英雄是谁？";
-"What's A ability's tier?" = "A技能的等级是多少？";
-"What's B ability's tier?" = "B技能的等级是多少？";
-"What's Ult's tier?" = "大招的等级是多少？";
+"What's the tier of your hero's A ability?" = "你的英雄A技能的等级是多少？";
+"What's the tier of your hero's B ability?" = "你的英雄B技能的等级是多少？";
+"What's the tier of your hero's Ult?" = "你的英雄大招的等级是多少？";
 "What do you want to calculate?" = "你想计算什么？";
 "Please select your hero" = "你的英雄是谁？";
 "Basic attack DPS" = "普通攻击DPS";
@@ -276,7 +276,11 @@
 "A ability raw crystal damage" = "A技能原始法术伤害";
 "Enemy defense weapon damage mitigation factor" = "敌方防御对物理伤害的减弱系数";
 "Enemy defense crystal damage mitigation factor" = "敌方防御对法术伤害的减弱系数";
-"Damage mitigation factor: multiply this number with raw damage, the result is the amount of damage the enemy will receive. " = "伤害减弱系数：把原始伤害跟这个数字相乘，得到的结果就是敌人受到的伤害。";
+"Damage mitigation factor: multiply this number with raw damage, the result is the amount of damage the enemy will receive. " = "伤害减弱系数：把原始伤害跟这个数字相乘，得到的结果就是真实伤害。";
+"Got it!" = "知道了！";
+"Hint" = "提示";
+"Swipte to right to see the results after you finish input" = "输入完成后请右滑查看结果";
+
 
 
 

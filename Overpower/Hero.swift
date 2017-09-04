@@ -10,7 +10,6 @@ import Foundation
 
 class Hero: Namable {
     
-    // var name: String
     var HPLow, HPHigh, weaponPowerLow, weaponPowerHigh, armorLow, armorHigh, shieldLow, shieldHigh, attackSpeedHigh, critChance, moveSpeed, attackSpeedLow, weaponPowerModifier, attackSpeedModifier, defenseModifier, attackCooldown: Double
     
     init(name: String, HPLow: Double, HPHigh: Double, armorLow: Double = 20, armorHigh: Double = 86, shieldLow: Double = 20, shieldHigh: Double = 86, weaponPowerLow: Double, weaponPowerHigh: Double, attackSpeedLow: Double = 1, attackSpeedHigh: Double, critChance: Double = 0, moveSpeed: Double, weaponPowerModifier: Double = 1, attackSpeedModifier: Double = 1, defenseModifier: Double = 1, attackCooldown: Double = 1.1) {

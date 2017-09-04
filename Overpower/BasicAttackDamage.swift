@@ -21,14 +21,14 @@ struct BasicAttackDamage {
             var averageWeaponPower: Double {
                 let bonus = (bonusWeaponPowerHigh - bonusWeaponPowerLow) / 11 * Double(dataSource.attacker.heroPower.level!) + bonusWeaponPowerLow
                 let weaponPower = dataSource.attacker.weaponPower + bonus / 2
-                return weaponPower * (1 + dataSource.attacker.critDamage) * dataSource.attacker.critChance + weaponPower * (1 - dataSource.attacker.critChance)
+                return weaponPower * (1 + dataSource.attacker.critDamage * dataSource.attacker.critChance)
             }
         }
-        return dataSource.attacker.weaponPower * (1 + dataSource.attacker.critDamage) * dataSource.attacker.critChance + dataSource.attacker.weaponPower * (1 - dataSource.attacker.critChance)
+        return dataSource.attacker.weaponPower * (1 + dataSource.attacker.critDamage * dataSource.attacker.critChance)
     }
         
     var rawWeaponDamagePerHit: Double {
-        if dataSource.attacker.heroPower.hero == Hero.idris && dataSource.attacker.crystalPower >= 125 && dataSource.attacker.isMeleeFighting == true {
+        if dataSource.attacker.heroPower.hero == Hero.idris && dataSource.attacker.crystalPower >= 100 && dataSource.attacker.isMeleeFighting == true {
             return weaponPowerWithCrit * 0.5
         }
         if dataSource.attacker.heroPower.hero == Hero.taka && dataSource.attacker.heroPower.kiStack > 0 {
@@ -94,7 +94,7 @@ struct BasicAttackDamage {
     }
     
     var rawCrystalDPS: Double {
-        return BasicAttackDamage(dataSource: dataSource).rawCrystalDamagePerHit * maxHitsPerSec
+        return rawCrystalDamagePerHit * maxHitsPerSec
     }
 
 }

@@ -43,7 +43,9 @@ struct Saw {
     
     var aAbilityDamageOnFullHealthEnemy: Double {
         let x = aAbilityDamagePerTier[aAbilityTier]! + dataSource.attacker.crystalPower * aAbilityCpRatio
-        return DamageCalculator(dataSource: dataSource).receivedCrystalDamageWithBrokenMythsPassive(x)
+        let rawDamage = x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        let trueDamage = rawDamage / (1 + dataSource.defender.shield / 100) * (1 - dataSource.attacker.shieldPierce) + rawDamage * dataSource.attacker.shieldPierce
+        return trueDamage / dataSource.defender.heroPower.hero!.defenseModifier
     }
     
     var aAbilityExecutableHealthPercentage: Double {
