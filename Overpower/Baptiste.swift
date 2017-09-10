@@ -31,9 +31,11 @@ struct Baptiste {
         return dataSource.attacker.cooldownReduction
     }
     
+    let passiveHealCrystalRatio = 0.2
+    
     let aAbilityCooldownPerTier: [Int : Double] = [1 : 4, 2 : 3.8, 3 : 3.6, 4 : 3.4, 5 : 3]
     let aAbilityDamagePerTier: [Int : Double] = [1 : 80, 2 : 120, 3 : 160, 4 : 200, 5 : 280]
-    let aAbilityDamageCrystalRatio = 1.1
+    let aAbilityDamageCrystalRatio = 1.05
     let aAbilitySplashDamagePerTier: [Int : Double] = [1 : 40, 2 : 60, 3 : 80, 4 : 100, 5 : 140]
     let aAbilitySplashDamageCrystalRatio = 0.55
     let aAbilitySlowPerTier: [Int : Double] = [1 : 0.6, 2 : 0.6, 3 : 0.6, 4 : 0.6, 5 : 0.6]
@@ -54,8 +56,8 @@ struct Baptiste {
     let ultFearDurationPerTier: [Int : Double] = [1 : 1, 2 : 1.3, 3 : 1.6]
     let ultRange = 22.0
     
-    var passiveFullStackHeal: Double {
-        return (70 - 15) / 11 + 15 + 0.8 * crystalPower
+    var passiveHeal: Double {
+        return (70 - 15) / 11 + 15 + passiveHealCrystalRatio * crystalPower
     }
     
     var aAbilityRawCrystalDamage: Double {

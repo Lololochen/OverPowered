@@ -31,6 +31,7 @@ class LocalItem: Selectable {
     static let luckyStrike = LocalItem(name: "Lucky Strike", image: #imageLiteral(resourceName: "lucky-strike"))
     static let sorrowBlade = LocalItem(name: "Sorrow Blade", image: #imageLiteral(resourceName: "sorrowblade"))
     static let serpentMask = LocalItem(name: "Serpent Mast", image: #imageLiteral(resourceName: "serpent-mask"))
+    static let spellsword = LocalItem(name: "Spellsword", image: #imageLiteral(resourceName: "spellsword"))
     static let breakingPoint = LocalItem(name: "Breaking Point", image: #imageLiteral(resourceName: "breaking-point"))
     static let tensionBow = LocalItem(name: "Tension Bow", image: #imageLiteral(resourceName: "tension-bow"))
     static let bonesaw = LocalItem(name: "Bonesaw", image: #imageLiteral(resourceName: "bonesaw"))

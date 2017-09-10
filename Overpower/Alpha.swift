@@ -37,7 +37,7 @@ struct Alpha {
     let bAbilityCdPerTier: [Int : Double] = [1 : 6, 2 : 5.5, 3 : 5, 4 : 4.5, 5 : 4]
     let bAbilityDamagePerTier: [Int : Double] = [1 : 20, 2 : 35, 3 : 50, 4 : 65, 5 : 80]
     let bAbilityCpRatio = 1.0
-    let bAbilityWpRatio = 1.0
+    let bAbilityWpRatio = 1.1
     let bAbilityBasicAttackCDRPerTier: [Int : Double] = [1 : 1, 2 : 1, 3 : 1, 4 : 1, 5 : 1.2]
     
     let ultDamagePerTier: [Int : Double] = [1 : 529, 2 : 933, 3 : 1337]

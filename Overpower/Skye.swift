@@ -30,7 +30,7 @@ struct Skye {
     let aAbilityDpsCrystalRatio = 1.2
     let aAbilityDpsWeaponRatio = 0.7
     let aAbilityLockOnBonus = 0.1
-    let aAbilityLockOnBonusCrystalRatio = 0.33
+    let aAbilityLockOnBonusCrystalRatio = 0.35
     let aAbilitySlowWeaponRatio = 0.2
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 14, 2 : 12, 3 : 10, 4 : 8, 5 : 6]

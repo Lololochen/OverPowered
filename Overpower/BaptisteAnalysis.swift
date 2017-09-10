@@ -18,7 +18,7 @@ class BaptisteAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
         
-        result.append(("Passive full stack heal".localizedString(), calculator.passiveFullStackHeal.string()))
+        result.append(("Passive heal".localizedString(), calculator.passiveHeal.string()))
         
         result.append(("A ability raw crystal damage".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         

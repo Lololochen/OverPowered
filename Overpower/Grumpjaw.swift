@@ -32,8 +32,8 @@ struct Grumpjaw {
     let aAbilityPerStackDamageCrystalRatio = 0.1
     
     let bAbilityCdPerTier: [Int : Double] = [1 : 9, 2 : 9, 3 : 9, 4 : 9, 5 : 9]
-    let bAbilityEmpoweredDuration: [Int : Double] = [1 : 4, 2 : 4, 3 : 4, 4 : 4, 5 : 5]
-    let bAbilityDamagePerTier: [Int : Double] = [1 : 20, 2 : 40, 3 : 60, 4 : 80, 5 : 100]
+    let bAbilityEmpoweredDuration: [Int : Double] = [1 : 5, 2 : 5, 3 : 5, 4 : 5, 5 : 6]
+    let bAbilityDamagePerTier: [Int : Double] = [1 : 30, 2 : 50, 3 : 70, 4 : 90, 5 : 110]
     let bAbilityAttackSpeedPerTier: [Int : Double] = [1 : 0.1, 2 : 0.2, 3 : 0.3, 4 : 0.4, 5 : 0.5]
     let bAbilityBonusDamageCrystalRatio = 0.8
     

@@ -26,8 +26,8 @@ struct Celeste {
     }
     
     let aAbilityCooldownPerTier: [Int : Double] = [1 : 2.8, 2 : 2.4, 3 : 2, 4 : 1.6, 5 : 1.2]
-    let aAbilityShootDamagePerTier: [Int : Double] = [1: 100, 2 : 150, 3 : 200, 4 : 250, 5 : 300]
-    let aAbilitySuperNovaDamagePerTier: [Int : Double] = [1 : 150, 2 : 200, 3 : 250, 4 : 300, 5 : 350]
+    let aAbilityShootDamagePerTier: [Int : Double] = [1: 80, 2 : 135, 3 : 190, 4 : 245, 5 : 300]
+    let aAbilitySuperNovaDamagePerTier: [Int : Double] = [1 : 130, 2 : 185, 3 : 240, 4 : 295, 5 : 350]
     let aAbilityRangePerTier: [Int : Double] = [1 : 7, 2 : 7, 3 : 7, 4 : 7, 5 : 9]
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 14, 2 : 13, 3 : 12, 4 : 11, 5 : 9]

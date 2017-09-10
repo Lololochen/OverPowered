@@ -45,7 +45,7 @@ class Hero: Namable {
     static let flicker = Hero(name: "Flicker", HPLow: 807, HPHigh: 1753, armorLow: 25, armorHigh: 85, shieldLow: 25, shieldHigh: 85, weaponPowerLow: 77, weaponPowerHigh: 155, attackSpeedHigh: 1.36, moveSpeed: 3.5)
     static let fortress = Hero(name: "Fortress", HPLow: 658, HPHigh: 1560, armorLow: 30, shieldLow: 30, weaponPowerLow: 73, weaponPowerHigh: 156, attackSpeedHigh: 1.44, moveSpeed: 3.4)
     static let glaive = Hero(name: "Glaive", HPLow: 814, HPHigh: 2046, armorLow: 30, shieldLow: 30, weaponPowerLow: 80, weaponPowerHigh: 153, attackSpeedHigh: 1.13, critChance: 0.25, moveSpeed: 3.3, attackCooldown: 1.03)
-    static let grace = Hero(name: "Grace", HPLow: 748, HPHigh: 1452, weaponPowerLow: 79, weaponPowerHigh: 158, attackSpeedHigh: 1.36, moveSpeed: 3.5)
+    static let grace = Hero(name: "Grace", HPLow: 748, HPHigh: 1452, weaponPowerLow: 73, weaponPowerHigh: 152, attackSpeedHigh: 1.36, moveSpeed: 3.5)
     static let grumpjaw = Hero(name: "Grumpjaw", HPLow: 765, HPHigh: 2107, armorLow: 30, shieldLow: 30, weaponPowerLow: 74, weaponPowerHigh: 158, attackSpeedHigh: 1.13, moveSpeed: 3.4)
     static let gwen = Hero(name: "Gwen", HPLow: 715, HPHigh: 1375, weaponPowerLow: 68, weaponPowerHigh: 132, attackSpeedHigh: 1.36, moveSpeed: 3.8)
     static let idris = Hero(name: "Idris", HPLow: 755, HPHigh: 1600, weaponPowerLow: 77, weaponPowerHigh: 161, attackSpeedHigh: 1.36, moveSpeed: 3.2)
@@ -59,6 +59,7 @@ class Hero: Namable {
     static let petal = Hero(name: "Petal", HPLow: 620, HPHigh: 1346, weaponPowerLow: 64, weaponPowerHigh: 134, attackSpeedLow: 1, attackSpeedHigh: 1.36, moveSpeed: 3.2)
     static let phinn = Hero(name: "Phinn", HPLow: 960, HPHigh: 1983, armorLow: 30, shieldLow: 30, weaponPowerLow: 95, weaponPowerHigh: 154, attackSpeedHigh: 1.13, moveSpeed: 2.8, attackCooldown: 1.35)
     static let reim = Hero(name: "Reim", HPLow: 739, HPHigh: 1894, armorLow: 30, armorHigh: 52, shieldLow: 30, shieldHigh: 52, weaponPowerLow: 80, weaponPowerHigh: 153, attackSpeedHigh: 1.36, moveSpeed: 3.2)
+    static let reza = Hero(name: "Reza", HPLow: 722, HPHigh: 1514, weaponPowerLow: 84, weaponPowerHigh: 154, attackSpeedHigh: 1.25, moveSpeed: 3.5)
     static let ringo = Hero(name: "Ringo", HPLow: 646, HPHigh: 1405, weaponPowerLow: 66, weaponPowerHigh: 130, attackSpeedHigh: 1.36, moveSpeed: 3.1)
     static let rona = Hero(name: "Rona", HPLow: 815, HPHigh: 1893, weaponPowerLow: 88, weaponPowerHigh: 156, attackSpeedHigh: 1.13, moveSpeed: 3.3, weaponPowerModifier: 0.85, attackCooldown: 0.79)
     static let samuel = Hero(name: "Samuel", HPLow: 687, HPHigh: 1479, weaponPowerLow: 78, weaponPowerHigh: 148, attackSpeedHigh: 1.3, moveSpeed: 3.2)
@@ -67,7 +68,6 @@ class Hero: Namable {
     static let skye = Hero(name: "Skye", HPLow: 650, HPHigh: 1563, weaponPowerLow: 72, weaponPowerHigh: 111, attackSpeedHigh: 1.36, moveSpeed: 3.1, attackCooldown: 1.09)
     static let taka = Hero(name: "Taka", HPLow: 741, HPHigh: 1555, weaponPowerLow: 68, weaponPowerHigh: 125, attackSpeedHigh: 1.36, moveSpeed: 3.4, attackCooldown: 1.39)
     static let vox = Hero(name: "Vox", HPLow: 695, HPHigh: 1465, weaponPowerLow: 72, weaponPowerHigh: 149, attackSpeedHigh: 1.35, moveSpeed: 3.3)
-    static let reza = Hero(name: "Reza", HPLow: 672, HPHigh: 1464, weaponPowerLow: 84, weaponPowerHigh: 154, attackSpeedHigh: 1.25, moveSpeed: 3.5)
     
     static let all = [adagio, alpha, ardan, baptiste, baron, blackfeather, catherine, celeste, flicker, fortress, glaive, grace, grumpjaw, gwen, idris, joule, kestrel, koshka, krul, lance, lyra, ozo, petal, phinn, reim, ringo, rona, samuel, saw, skaarf, skye, taka, vox, reza]
     

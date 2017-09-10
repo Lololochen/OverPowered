@@ -44,6 +44,7 @@ class Item: Namable {
     static let luckyStrike = Item(name: "Lucky Strike", price: 900, critChance: 0.2, critDamage: 0.15)
     static let sorrowBlade = Item(name: "Sorrow Blade", price: 3100, weaponPower: 150)
     static let serpentMask = Item(name: "Serpent Mast", price: 2800, weaponPower: 85)
+    static let spellsword = Item(name: "Spellsword", price: 2600, weaponPower: 90, cooldownReduction: 0.35, energyRecharge: 2.5)
     static let poisonedShiv = Item(name: "Poisoned Shiv", price: 2250, weaponPower: 30, attackSpeed: 0.3)
     static let breakingPoint = Item(name: "Breaking Point", price: 2600, weaponPower: 55, attackSpeed: 0.2)
     static let tensionBow = Item(name: "Tension Bow", price: 2150, weaponPower: 45, armorPierce: 0.1)
@@ -96,7 +97,7 @@ class Item: Namable {
     static let nullwaveGauntlet = Item(name: "Nullwave Gauntlet", price: 2200, cooldownReduction: 0.25, health: 400, energyRecharge: 4)
 
     
-    static let weaponItems = [weaponBlade, swiftShooter, bookOfEulogies, minionsFoot, heavySteel, sixSins, barbedNeedle, piercingSpear, blazingSalvo, luckyStrike, sorrowBlade, serpentMask, tensionBow, bonesaw, tornadoTrigger, tyrantsMonocle, poisonedShiv, breakingPoint]
+    static let weaponItems = [weaponBlade, swiftShooter, bookOfEulogies, minionsFoot, heavySteel, sixSins, barbedNeedle, piercingSpear, blazingSalvo, luckyStrike, sorrowBlade, serpentMask, spellsword, tensionBow, bonesaw, tornadoTrigger, tyrantsMonocle, poisonedShiv, breakingPoint]
     
     static let crystalItems = [crystalBit, energyBattery, hourglass, heavyPrism, eclipsePrism, voidBattery, piercingShard, chronograph, shatterglass, brokenMyth, frostburn, eveOfHarvest, clockwork, aftershock, alternatingCurrent]
     

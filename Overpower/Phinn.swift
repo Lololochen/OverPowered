@@ -33,7 +33,7 @@ struct Phinn {
     let bAbilityDamagePerTier: [Int : Double] = [1 : 60, 2 : 120, 3 : 180, 4 : 240, 5 : 360]
     let bAbilityCpRatio = 1.2
     let bAbilityDurationPerTier: [Int : Double] = [1 : 3, 2 : 3, 3 : 3, 4 : 3, 5 : 4]
-    let bAbilityFortifiedHealthPerTier: [Int : Double] = [1 : 120, 2 : 150, 3 : 180, 4 : 210, 5 : 270]
+    let bAbilityFortifiedHealthPerTier: [Int : Double] = [1 : 140, 2 : 170, 3 : 200, 4 : 230, 5 : 290]
     
     let ultDamagePerTier: [Int : Double] = [1 : 100, 2 : 300, 3 : 500]
     let ultCpRatio = 1.5

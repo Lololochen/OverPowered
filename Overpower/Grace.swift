@@ -37,7 +37,7 @@ struct Grace {
     let bAbilityDamagePerTier: [Int : Double] = [1 : 125, 2 : 200, 3 : 275, 4 : 350, 5 : 425]
     let bAbilityDamageCPRatio: Double = 2
     
-    let ultCDPerTier: [Int : Double] = [1 : 60, 2 : 45, 3 : 30]
+    let ultCDPerTier: [Int : Double] = [1 : 70, 2 : 60, 3 : 50]
     let ultHeaLPetTier: [Int : Double] = [1 : 400, 2 : 500, 3 : 600]
     let ultHealCPRatio: Double = 2
     let empoweredBasicAttackSlowStrength: Double = 0.75

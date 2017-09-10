@@ -26,7 +26,7 @@ struct Krul {
     }
     
     let aAbilityCdPerTier: [Int : Double] = [1 : 8, 2 : 8, 3 : 8, 4 : 8, 5 : 7]
-    let aAbilityBarrierPerTier: [Int : Double] = [1 : 100, 2 : 180, 3 : 260, 4 : 340, 5 : 420]
+    let aAbilityBarrierPerTier: [Int : Double] = [1 : 80, 2 : 160, 3 : 240, 4 : 320, 5 : 400]
     let aAbilityCpRatio = 0.7
     let aAbilityBarrierCrystalRatio = 1.25
    

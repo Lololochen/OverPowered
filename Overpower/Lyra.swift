@@ -25,7 +25,7 @@ struct Lyra {
         return dataSource.attacker.heroPower.ultTier
     }
     
-    let aAbilityCdPerTier: [Int : Double] = [1 : 10, 2 : 9.5, 3 : 9, 4 : 8.5, 5 : 8]
+    let aAbilityCdPerTier: [Int : Double] = [1 : 14, 2 : 12.5, 3 : 11, 4 : 9.5, 5 : 8]
     let aAbilityDamagePerSecPerTier: [Int : Double] = [1 : 60, 2 : 100, 3 : 140, 4 : 180, 5 : 260]
     let aAbilityHealPerSecPerTier: [Int : Double] = [1 : 40, 2 : 60, 3 : 80, 4 : 100, 5 : 140]
     let aAbilityDetonateDamagePerTier: [Int : Double] = [1 : 75, 2 : 125, 3 : 175, 4 : 225, 5 : 325]

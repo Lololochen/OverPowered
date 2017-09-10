@@ -25,6 +25,8 @@ struct Taka {
         return dataSource.attacker.heroPower.ultTier
     }
     
+    let perkCDR = 0.25
+    
     let aAbilityDamagePerTier: [Int : Double] = [1 : 100, 2 : 165, 3 : 230, 4 : 295, 5 : 360]
     let aAbilityCooldownPerTier: [Int : Double] = [1 : 15, 2 : 15, 3 : 15, 4 : 15, 5 : 15]
     
@@ -43,19 +45,15 @@ struct Taka {
     }
     
     var aAbilityCooldown: Double {
-        return aAbilityCooldownPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * 0.2)
+        return aAbilityCooldownPerTier[aAbilityTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * perkCDR)
     }
     
     var bAbilityHeal: Double {
-        if bAbilityTier == 5 {
-            return (bAbilityHealPerSec[bAbilityTier]! + dataSource.attacker.crystalPower * 0.25) * 4
-        } else {
-            return (bAbilityHealPerSec[bAbilityTier]! + dataSource.attacker.crystalPower * 0.25) * 3
-        }
+        return (bAbilityHealPerSec[bAbilityTier]! + dataSource.attacker.crystalPower * 0.25) * 4
     }
 
     var bAbilityCooldown: Double {
-        return bAbilityCooldownPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * 0.2)
+        return bAbilityCooldownPerTier[bAbilityTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * perkCDR)
     }
     
     var ultInitialRawDamage: Double {
@@ -74,7 +72,7 @@ struct Taka {
     }
     
     var ultCooldown: Double {
-        return ultCooldownPerTier[ultTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * 0.2)
+        return ultCooldownPerTier[ultTier]! / (1 + dataSource.attacker.cooldownReduction + Double(dataSource.attacker.heroPower.kiStack) * perkCDR)
     }
 
 }

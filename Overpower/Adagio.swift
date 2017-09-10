@@ -29,7 +29,7 @@ struct Adagio {
     let aAbilityFireDamagePerSec : [Int : Double] = [1 : 20, 2 : 20, 3 : 40, 4 : 50, 5 : 70]
     let aAbilityInstantHeal: [Int : Double] = [1 : 40, 2 : 60, 3 : 80, 4 : 100, 5 : 140]
     let aAbilityHealPerSec: [Int : Double] = [1 : 15, 2 : 20, 3 : 25, 4 : 30, 5 : 35]
-    let aAbilityCooldownPerTier: [Int : Double] = [1 : 8, 2 : 8, 3 : 8, 4 : 8, 5 : 8]
+    let aAbilityCooldownPerTier: [Int : Double] = [1 : 10, 2 : 9.5, 3 : 9.5, 4 : 8, 5 : 8]
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 10, 2 : 10, 3 : 10, 4 : 10, 5 : 10]
     let bAbilityNumberOfAttacksPerTier: [Int : Double] = [1 : 5, 2 : 5, 3 : 5, 4 : 5, 5 : 7]

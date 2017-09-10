@@ -33,7 +33,7 @@ class ConversationVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         if UserDefaults.standard.bool(forKey: "Launched before") == false {
             showPrompt()
-            UserDefaults.standard.set(false, forKey: "Launched before")
+            UserDefaults.standard.set(true, forKey: "Launched before")
         }
     }
     

@@ -25,14 +25,16 @@ struct Skaarf {
         return dataSource.attacker.heroPower.ultTier
     }
     
-    let aAbilityCooldownPerTier: [Int : Double] = [1 : 6, 2 : 5.5, 3 : 5, 4 : 4.5, 5 : 3]
+    let burningBaseRawDPS: Double = 8
+        
+    let aAbilityCooldownPerTier: [Int : Double] = [1 : 5, 2 : 4.5, 3 : 4, 4 : 3.5, 5 : 3]
     let aAbilityDamagePerTier: [Int : Double] = [1 : 75, 2 : 135, 3 : 195, 4 : 255, 5 : 315]
     let aAbilityFireBallSpeedPerTier: [Int : Double] = [1 : 9, 2 : 9.5, 3 : 10, 4 : 10.5, 5 : 11]
-    let aAbilityCpRatio = 1.5
+    let aAbilityCpRatio = 1.3
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 10, 2 : 10, 3 : 10, 4 : 10, 5 : 8]
     let bAbilityIgniteDamagePerTier: [Int : Double] = [1 : 40, 2 : 60, 3 : 80, 4 : 100, 5 : 120]
-    let bAbilityDpsPerTier: [Int : Double] = [1 : 60, 2 : 100, 3 : 140, 4 : 180, 5 : 220]
+    let bAbilityDpsPerTier: [Int : Double] = [1 : 40, 2 : 85, 3 : 130, 4 : 175, 5 : 220]
     let bAbilityBurnDurationPerTier: [Int : Double] = [1 : 8, 2 : 8, 3 : 8, 4 : 8, 5 : 10]
     let bAbilityIgniteCrystalRatio = 0.7
     let bAbilityDpsCrystalRatio = 1.4
@@ -52,7 +54,7 @@ struct Skaarf {
     var aAbilityWithBasicAttacksMaxRawCrystalDPS: Double {
         let basicAttackDPS = BasicAttackDamage(dataSource: dataSource).rawCrystalDPS
         let abilityDPS = aAbilityRawDamage / aAbilityCooldown
-        return basicAttackDPS + abilityDPS
+        return basicAttackDPS + abilityDPS + burningBaseRawDPS
     }
     
     var aAbilityCooldown: Double {

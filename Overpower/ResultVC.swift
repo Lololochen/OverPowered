@@ -36,5 +36,6 @@ class ResultVC: UITableViewController {
 
         return cell
     }
+    
 
 }

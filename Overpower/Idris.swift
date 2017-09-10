@@ -31,7 +31,7 @@ struct Idris {
     let barrierWeaponRatio = 0.75
     
     let bAbilityCooldownPerTier: [Int : Double] = [1 : 8, 2 : 7.5, 3 : 7, 4 : 6.5, 5 : 5]
-    let bAbilityDamagePerTier: [Int : Double] = [1 : 75, 2 : 125, 3 : 175, 4 : 225, 5 : 275]
+    let bAbilityDamagePerTier: [Int : Double] = [1 : 60, 2 : 110, 3 : 160, 4 : 210, 5 : 260]
     let bAbilityWpRatio: Double = 0.9
     let bAbilityCpRatio: Double = 1.3
     
