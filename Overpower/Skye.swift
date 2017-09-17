@@ -57,9 +57,8 @@ struct Skye {
     }
     
     var aAbilityLockOnRawCrystalDPS: Double {
-        let bonusRatio = dataSource.attacker.crystalPower * aAbilityLockOnBonusCrystalRatio
-        let newDamage = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * (aAbilityDpsCrystalRatio + bonusRatio)
-        return newDamage * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
+        let x = aAbilityDpsPerTier[aAbilityTier]! + dataSource.attacker.crystalPower * (aAbilityDpsCrystalRatio + aAbilityLockOnBonusCrystalRatio)
+        return x * (1 + Double(dataSource.attacker.buildPower.brokenMythStack) * 0.04)
     }
     
     var aAbilityLockOnFullRawCrystalDamage: Double {

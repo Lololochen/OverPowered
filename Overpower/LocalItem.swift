@@ -82,7 +82,7 @@ class LocalItem: Selectable {
     static let nullwaveGauntlet = LocalItem(name: "Nullwave Gauntlet", image: #imageLiteral(resourceName: "nullwave-gauntlet"))
 
     
-    static let weaponItems = [weaponBlade, swiftShooter, bookOfEulogies, minionsFoot, heavySteel, sixSins, barbedNeedle, piercingSpear, blazingSalvo, luckyStrike, sorrowBlade, serpentMask, tensionBow, bonesaw, tornadoTrigger, tyrantsMonocle, poisonedShiv, breakingPoint, weaponInfusionLv12]
+    static let weaponItems = [weaponBlade, swiftShooter, bookOfEulogies, minionsFoot, heavySteel, sixSins, barbedNeedle, piercingSpear, blazingSalvo, luckyStrike, sorrowBlade, serpentMask, spellsword, tensionBow, bonesaw, tornadoTrigger, tyrantsMonocle, poisonedShiv, breakingPoint, weaponInfusionLv12]
     
     static let crystalItems = [crystalBit, energyBattery, hourglass, heavyPrism, eclipsePrism, voidBattery, piercingShard, chronograph, shatterglass, brokenMyth, frostburn, eveOfHarvest, clockwork, aftershock, alternatingCurrent, crystalInfusionLv12]
     

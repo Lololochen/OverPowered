@@ -76,8 +76,6 @@ class PlayerFightPower {
         return heroPower.health + buildPower.health
     }
     
-    var healthPercentage: Double = 1
-    
     var moveSpeed: Double {
         return heroPower.hero!.moveSpeed + buildPower.moveSpeed
     }
