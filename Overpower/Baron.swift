@@ -46,14 +46,6 @@ struct Baron {
         return dataSource.attacker.buildPower.weaponPower * 0.7
     }
     
-    var aAbilityMaxRawCrystalDPS: Double {
-        return aAbilityRawCrystalDamage / aAbilityChargeTime
-    }
-    
-    var aAbilityMaxRawWeaponDPS: Double {
-        return aAbilityRawWeaponDamage / aAbilityChargeTime
-    }
-    
     var aAbilityRange: Double {
         let optimalRange = 8 + dataSource.attacker.crystalPower * 0.015
         if optimalRange > 11 {

@@ -18,9 +18,9 @@ class BaronAnalysis: AbilityAnalysis {
         
         result.append(contentsOf: genericInfo())
         
-        result.append(("A ability max raw crystal DPS".localizedString(), calculator.aAbilityMaxRawCrystalDPS.string()))
+        result.append(("A ability raw crystal damage per shot".localizedString(), calculator.aAbilityRawCrystalDamage.string()))
         
-        result.append(("A ability max raw weapon DPS".localizedString(), calculator.aAbilityMaxRawWeaponDPS.string()))
+        result.append(("A ability raw weapon damage per shot".localizedString(), calculator.aAbilityRawWeaponDamage.string()))
         
         result.append(("Slow factor".localizedString(), percentageString(calculator.aAbilitySlowFactor)))
         
